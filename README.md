@@ -42,6 +42,15 @@ flutter run -d chrome
 
 ---
 
+## Contributing & CI/CD
+
+We welcome contributions from developers, midwives, and maternal health advocates!
+- Read [`CONTRIBUTING.md`](CONTRIBUTING.md) for local setup instructions, architectural rules, and how to run `flutter analyze` and `flutter test`.
+- See [`CONTRIBUTORS.md`](CONTRIBUTORS.md) for project maintainers and contributors.
+- Automated CI/CD is configured in [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (with a live Neo4j 5 service container, static analysis, unit tests, and web release builds).
+
+---
+
 ## Open-Source License
 
 Copyright © 2026 Niamama Open Source Maternal & Infant Care Contributors.  
