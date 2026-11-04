@@ -1,0 +1,73 @@
+name: Niamama CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  analyze-and-test:
+    name: Analyze, Test & Verify Neo4j Graph
+    runs-on: ubuntu-latest
+
+    services:
+      neo4j:
+        image: neo4j:5-community
+        env:
+          NEO4J_AUTH: neo4j/niamama_graph_2026
+          NEO4J_dbms_security_procedures_unrestricted: "*"
+        ports:
+          - 7474:7474
+          - 7687:7687
+        options: >-
+          --health-cmd "wget --no-verbose --tries=1 --spider http://localhost:7474 || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install Flutter dependencies
+        run: flutter pub get
+
+      - name: Verify Neo4j Knowledge Graph seed endpoint
+        run: |
+          curl --fail -s -u neo4j:niamama_graph_2026 \
+            -H "Content-Type: application/json" \
+            -d '{"statements":[{"statement":"MERGE (w:WHOSource {code:\"WHO-PNC-2024\"}) RETURN w.code"}]}' \
+            http://localhost:7474/db/neo4j/tx/commit
+
+      - name: Run Dart static analysis
+        run: flutter analyze
+
+      - name: Run automated multi-tenant & Neo4j test suite
+        run: flutter test --coverage
+
+  build-web:
+    name: Build Web Bundle
+    needs: analyze-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install dependencies & build web release
+        run: |
+          flutter pub get
+          flutter build web --release
