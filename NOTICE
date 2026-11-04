@@ -1,0 +1,12 @@
+Niamama — Open-Source Postpartum & Infant Care Companion
+Copyright 2026 Niamama Open Source Maternal & Infant Care Contributors
+
+This product includes open-source software developed by the Niamama community
+under the Apache License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0).
+
+Clinical Knowledge Graph & Protocols:
+- Grounded in World Health Organization (WHO) Recommendations on Maternal and
+  Newborn Care for a Positive Postnatal Experience (2022–2026) and Essential
+  Programme on Immunization (EPI) schedules.
+- Powered by Neo4j Community Edition (https://neo4j.com/) and an offline-first
+  local clinical graph mirror for zero-connectivity maternal triage.
