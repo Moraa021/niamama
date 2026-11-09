@@ -1,0 +1,37 @@
+name: Good First Issue
+description: A well-scoped starter task for first-time contributors to Niamama
+title: "[Good First Issue]: "
+labels: ["good first issue", "help wanted"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Welcome to **Niamama**! This issue is designed for first-time contributors looking to make a meaningful impact on open-source maternal and infant care.
+  - type: textarea
+    id: context
+    attributes:
+      label: Context & Why It Matters
+      description: Explain the maternal/infant care or architectural problem this task solves.
+    validations:
+      required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: Key Files to Inspect
+      description: List the exact Dart files or directories involved.
+      placeholder: |
+        - `lib/screens/...`
+        - `lib/services/...`
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Checklist of requirements to complete this issue.
+      placeholder: |
+        - [ ] Requirement 1
+        - [ ] `flutter analyze` passes with 0 issues
+        - [ ] `flutter test` passes
+    validations:
+      required: true

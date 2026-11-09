@@ -1,0 +1,24 @@
+name: Feature Request
+description: Propose a new maternal, infant, or clinical feature for Niamama
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Clinical or User Problem
+      description: What postpartum or infant care challenge does this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe how this should work offline-first and within the Nurture & Bloom design system.
+    validations:
+      required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: Affected Components
+      description: Which screens, widgets, or services will be updated?
