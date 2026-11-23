@@ -1,3 +1,4 @@
+import 'l10n/app_localizations.dart';
 import 'widgets/partner_copilot_sheet.dart';
 import 'widgets/safe_avatar.dart';
 import 'package:flutter/material.dart';
@@ -23,16 +24,25 @@ void main() {
   runApp(const NiamamaApp());
 }
 
+/// Active UI locale; follows the active mother tenant's saved language.
+final ValueNotifier<Locale> appLocale = ValueNotifier(const Locale('en'));
+
 class NiamamaApp extends StatelessWidget {
   const NiamamaApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Niamama — Postpartum & Infant Care Companion',
-      debugShowCheckedModeBanner: false,
-      theme: NurtureBloomTheme.lightTheme,
-      home: const NiamamaShellScreen(),
+    return ValueListenableBuilder<Locale>(
+      valueListenable: appLocale,
+      builder: (context, locale, _) => MaterialApp(
+        title: 'Niamama — Postpartum & Infant Care Companion',
+        debugShowCheckedModeBanner: false,
+        theme: NurtureBloomTheme.lightTheme,
+        locale: locale,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: const NiamamaShellScreen(),
+      ),
     );
   }
 }
@@ -53,7 +63,14 @@ class _NiamamaShellScreenState extends State<NiamamaShellScreen>
   List<MotherTenantProfile> _tenants = List<MotherTenantProfile>.from(
     MotherTenantProfile.defaultTenants,
   );
-  MotherTenantProfile _activeTenant = MotherTenantProfile.defaultTenants.first;
+  MotherTenantProfile _activeTenantValue =
+      MotherTenantProfile.defaultTenants.first;
+  MotherTenantProfile get _activeTenant => _activeTenantValue;
+  set _activeTenant(MotherTenantProfile value) {
+    _activeTenantValue = value;
+    appLocale.value = Locale(value.languageCode);
+  }
+
   bool _isPinLocked = false;
   bool _isMultiTenantSelectorOpen = false;
 
@@ -424,6 +441,7 @@ class _NiamamaShellScreenState extends State<NiamamaShellScreen>
         onOpenSpeedDial: _openEmergencySpeedDial,
         onOpenSafeChat: _openSafeChat,
         onShowToast: _showToast,
+        languageCode: _activeTenant.languageCode,
       ),
     );
   }
@@ -806,22 +824,22 @@ class _NiamamaShellScreenState extends State<NiamamaShellScreen>
                 _buildBottomNavItem(
                   index: 0,
                   icon: Icons.eco_rounded,
-                  label: 'Home',
+                  label: AppLocalizations.of(context)!.navHome,
                 ),
                 _buildBottomNavItem(
                   index: 1,
                   icon: Icons.event_available_rounded,
-                  label: 'Timeline',
+                  label: AppLocalizations.of(context)!.navTimeline,
                 ),
                 _buildBottomNavItem(
                   index: 2,
                   icon: Icons.local_hospital_rounded,
-                  label: 'Care Map',
+                  label: AppLocalizations.of(context)!.navCareMap,
                 ),
                 _buildBottomNavItem(
                   index: 3,
                   icon: Icons.favorite_rounded,
-                  label: 'Support',
+                  label: AppLocalizations.of(context)!.navSupport,
                 ),
               ],
             ),

@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:niamama/models/niamama_models.dart';
 import 'package:niamama/services/neo4j_knowledge_service.dart';
 import 'package:niamama/services/offline_vault_service.dart';
+import 'package:niamama/services/triage_translations_sw.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -126,5 +127,28 @@ void main() {
     final reloaded = await OfflineVaultService.loadState(tenant: amara);
     expect(reloaded.wetDiapers, 0);
     expect(reloaded.countsDate, NiamamaState.todayKey());
+  });
+
+  test('All 6 core triage pathways have Kiswahili translations', () {
+    final nodes = Neo4jKnowledgeGraphService.clinicalTriageGraph.take(6);
+    for (final n in nodes) {
+      expect(triageTranslationsSw.containsKey(n.id), isTrue, reason: n.id);
+      final sw = localizeTriageNode(n, 'sw');
+      expect(sw.symptomTitle, isNot(n.symptomTitle));
+      expect(sw.immediateActions.length, n.immediateActions.length);
+      expect(sw.whoCitationCode, n.whoCitationCode); // clinical code unchanged
+      expect(localizeTriageNode(n, 'en').symptomTitle, n.symptomTitle);
+    }
+  });
+
+  test('Tenant language preference persists per tenant', () async {
+    final tenants = await OfflineVaultService.loadTenants();
+    expect(tenants[0].languageCode, 'en');
+    await OfflineVaultService.saveTenants(
+      [tenants[0].copyWith(languageCode: 'sw'), tenants[1]],
+    );
+    final reloaded = await OfflineVaultService.loadTenants();
+    expect(reloaded[0].languageCode, 'sw');
+    expect(reloaded[1].languageCode, 'en');
   });
 }

@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../models/niamama_models.dart';
 import '../theme/nurture_bloom_theme.dart';
 
 class PartnerTask {
   final String id;
-  final String text;
-  const PartnerTask(this.id, this.text);
+  const PartnerTask(this.id);
+
+  String label(AppLocalizations l) => switch (id) {
+        'water' => l.partnerTaskWater,
+        'sleep' => l.partnerTaskSleep,
+        'burp' => l.partnerTaskBurp,
+        'meal' => l.partnerTaskMeal,
+        'night' => l.partnerTaskNight,
+        _ => l.partnerTaskVisitors,
+      };
 }
 
 /// "How to Help Right Now" companion for partners / family members.
@@ -22,23 +31,16 @@ class PartnerCopilotSheet extends StatefulWidget {
   });
 
   static const List<PartnerTask> tasks = [
-    PartnerTask('water', 'Refill a 1L water bottle at the nursing station'),
-    PartnerTask('sleep', "Protect Mama's 4-hour unbroken sleep block"),
-    PartnerTask('burp', 'Handle burping & diaper change after each feed'),
-    PartnerTask(
-        'meal', 'Prepare a warm meal and a snack she can eat one-handed'),
-    PartnerTask(
-        'night', 'Take one night feed handover (bring baby, then settle baby)'),
-    PartnerTask('visitors', 'Gently manage visitors so Mama can rest'),
+    PartnerTask('water'),
+    PartnerTask('sleep'),
+    PartnerTask('burp'),
+    PartnerTask('meal'),
+    PartnerTask('night'),
+    PartnerTask('visitors'),
   ];
 
-  static const List<String> redFlags = [
-    'Severe headache that will not go away, or blurred vision (possible postpartum pre-eclampsia)',
-    'Soaking a pad in under an hour, or passing large clots (heavy bleeding)',
-    'Fever of 38°C or higher, or foul-smelling discharge',
-    'Chest pain, trouble breathing, or one swollen painful leg',
-    'Hopelessness, withdrawal, not eating, or talk of self-harm (needs support today)',
-  ];
+  static List<String> redFlags(AppLocalizations l) =>
+      [l.redFlag1, l.redFlag2, l.redFlag3, l.redFlag4, l.redFlag5];
 
   @override
   State<PartnerCopilotSheet> createState() => _PartnerCopilotSheetState();
@@ -48,31 +50,28 @@ class _PartnerCopilotSheetState extends State<PartnerCopilotSheet> {
   late final Map<String, bool> _checked =
       Map<String, bool>.from(widget.checklist);
 
-  String get _briefing {
+  String _briefing(AppLocalizations l) {
     final w = widget.tenant.babyAgeWeeks;
     final mama = widget.tenant.mamaFirstName;
     final baby = widget.tenant.babyName;
-    final phase = w <= 2
-        ? 'The first two weeks are the hardest: $baby feeds very often and $mama is recovering from birth.'
-        : w <= 8
-            ? '$baby is feeding very often (cluster feeding is normal) and $mama\'s body is still healing, so she is tired and her mood can swing.'
-            : '$baby is settling into a rhythm, but $mama is still recovering and may be running on little sleep.';
-    return 'Week $w. $phase Your job right now: take the load off, so she can feed, heal and sleep.';
+    if (w <= 2) return l.briefingEarly(w, baby, mama);
+    if (w <= 8) return l.briefingMid(w, baby, mama);
+    return l.briefingLate(w, baby, mama);
   }
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
     final done =
         PartnerCopilotSheet.tasks.where((t) => _checked[t.id] ?? false).length;
     return DraggableScrollableSheet(
       initialChildSize: 0.9,
       minChildSize: 0.5,
       maxChildSize: 0.95,
-      builder: (ctx, scroll) => Container(
-        decoration: const BoxDecoration(
-          color: NurtureBloomColors.surfaceContainerLowest,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-        ),
+      builder: (ctx, scroll) => Material(
+        color: NurtureBloomColors.surfaceContainerLowest,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+        clipBehavior: Clip.antiAlias,
         child: ListView(
           controller: scroll,
           padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
@@ -81,7 +80,7 @@ class _PartnerCopilotSheetState extends State<PartnerCopilotSheet> {
               children: [
                 Expanded(
                   child: Text(
-                    'How to Help Right Now',
+                    l.partnerTitle,
                     style: NurtureBloomTextStyles.headlineSm,
                   ),
                 ),
@@ -89,7 +88,7 @@ class _PartnerCopilotSheetState extends State<PartnerCopilotSheet> {
                   width: 48,
                   height: 48,
                   child: IconButton(
-                    tooltip: 'Close',
+                    tooltip: l.close,
                     onPressed: () => Navigator.of(context).pop(),
                     icon: const Icon(Icons.close_rounded),
                   ),
@@ -106,10 +105,10 @@ class _PartnerCopilotSheetState extends State<PartnerCopilotSheet> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('30-second briefing',
+                  Text(l.partnerBriefingTitle,
                       style: NurtureBloomTextStyles.labelMd),
                   const SizedBox(height: 4),
-                  Text(_briefing, style: NurtureBloomTextStyles.bodyMd),
+                  Text(_briefing(l), style: NurtureBloomTextStyles.bodyMd),
                 ],
               ),
             ),
@@ -122,7 +121,7 @@ class _PartnerCopilotSheetState extends State<PartnerCopilotSheet> {
                 contentPadding: EdgeInsets.zero,
                 controlAffinity: ListTileControlAffinity.leading,
                 value: _checked[t.id] ?? false,
-                title: Text(t.text, style: NurtureBloomTextStyles.bodyMd),
+                title: Text(t.label(l), style: NurtureBloomTextStyles.bodyMd),
                 onChanged: (v) {
                   setState(() => _checked[t.id] = v ?? false);
                   widget.onToggleTask(t.id, v ?? false);
@@ -143,13 +142,13 @@ class _PartnerCopilotSheetState extends State<PartnerCopilotSheet> {
                       const Icon(Icons.warning_amber_rounded,
                           color: NurtureBloomColors.onErrorContainer),
                       const SizedBox(width: 8),
-                      Text('Red-flag watchlist',
+                      Text(l.redFlagTitle,
                           style: NurtureBloomTextStyles.labelMd.copyWith(
                               color: NurtureBloomColors.onErrorContainer)),
                     ],
                   ),
                   const SizedBox(height: 6),
-                  for (final f in PartnerCopilotSheet.redFlags)
+                  for (final f in PartnerCopilotSheet.redFlags(l))
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 3),
                       child: Text('• $f',
@@ -158,7 +157,7 @@ class _PartnerCopilotSheetState extends State<PartnerCopilotSheet> {
                     ),
                   const SizedBox(height: 6),
                   Text(
-                    'If you notice any of these, call the maternal helpline 1190 or go to the nearest facility now.',
+                    l.redFlagCall,
                     style: NurtureBloomTextStyles.labelMd
                         .copyWith(color: NurtureBloomColors.onErrorContainer),
                   ),

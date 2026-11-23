@@ -1,3 +1,4 @@
+import '../l10n/app_localizations.dart';
 import '../services/pin_hasher.dart';
 import 'package:flutter/material.dart';
 import '../models/niamama_models.dart';
@@ -25,6 +26,13 @@ class TenantSecuritySheet extends StatefulWidget {
 
 class _TenantSecuritySheetState extends State<TenantSecuritySheet> {
   late bool _requirePinEveryTime;
+  late MotherTenantProfile _tenant;
+
+  void _apply(MotherTenantProfile updated) {
+    setState(() => _tenant = updated);
+    widget.onUpdateActiveTenant(updated);
+  }
+
   bool _isEditingPin = false;
   final TextEditingController _newPinController = TextEditingController();
   String? _pinError;
@@ -32,6 +40,7 @@ class _TenantSecuritySheetState extends State<TenantSecuritySheet> {
   @override
   void initState() {
     super.initState();
+    _tenant = widget.activeTenant;
     _requirePinEveryTime = widget.activeTenant.requirePinEveryTime;
   }
 
@@ -43,8 +52,8 @@ class _TenantSecuritySheetState extends State<TenantSecuritySheet> {
 
   void _toggleRequirePin(bool value) {
     setState(() => _requirePinEveryTime = value);
-    final updated = widget.activeTenant.copyWith(requirePinEveryTime: value);
-    widget.onUpdateActiveTenant(updated);
+    final updated = _tenant.copyWith(requirePinEveryTime: value);
+    _apply(updated);
     widget.onShowToast(
       value
           ? 'Security updated: PIN required every time you access Niamama'
@@ -58,8 +67,8 @@ class _TenantSecuritySheetState extends State<TenantSecuritySheet> {
       setState(() => _pinError = 'Please enter a valid 4-digit numeric PIN');
       return;
     }
-    final updated = widget.activeTenant.copyWith(pinCode: PinHasher.hash(pin));
-    widget.onUpdateActiveTenant(updated);
+    final updated = _tenant.copyWith(pinCode: PinHasher.hash(pin));
+    _apply(updated);
     setState(() {
       _isEditingPin = false;
       _pinError = null;
@@ -130,6 +139,44 @@ class _TenantSecuritySheetState extends State<TenantSecuritySheet> {
                     backgroundColor: NurtureBloomColors.surfaceContainerLow,
                   ),
                   icon: const Icon(Icons.close_rounded, size: 20),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+
+            // Language toggle (EN / SW), saved per mother tenant
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        AppLocalizations.of(context)!.languageLabel,
+                        style: NurtureBloomTextStyles.labelLg,
+                      ),
+                      Text(
+                        AppLocalizations.of(context)!.languageSubtitle,
+                        style: NurtureBloomTextStyles.labelSm,
+                      ),
+                    ],
+                  ),
+                ),
+                SegmentedButton<String>(
+                  style: const ButtonStyle(
+                    minimumSize: WidgetStatePropertyAll(Size(56, 48)),
+                  ),
+                  showSelectedIcon: false,
+                  segments: const [
+                    ButtonSegment(value: 'en', label: Text('EN')),
+                    ButtonSegment(value: 'sw', label: Text('SW')),
+                  ],
+                  selected: {_tenant.languageCode},
+                  onSelectionChanged: (sel) {
+                    _apply(
+                      _tenant.copyWith(languageCode: sel.first),
+                    );
+                  },
                 ),
               ],
             ),

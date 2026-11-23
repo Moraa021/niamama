@@ -1,3 +1,4 @@
+import '../l10n/app_localizations.dart';
 import '../widgets/safe_avatar.dart';
 import 'package:flutter/material.dart';
 import '../models/niamama_models.dart';
@@ -102,7 +103,7 @@ class SupportCircleScreen extends StatelessWidget {
           child: OutlinedButton.icon(
             onPressed: onOpenPartnerCopilot,
             icon: const Icon(Icons.volunteer_activism_rounded),
-            label: const Text('Partner Mode: How to Help Right Now'),
+            label: Text(AppLocalizations.of(context)!.partnerModeButton),
           ),
         ),
         const SizedBox(height: 18),

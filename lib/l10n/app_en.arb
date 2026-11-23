@@ -1,0 +1,99 @@
+{
+  "@@locale": "en",
+  "navHome": "Home",
+  "navTimeline": "Timeline",
+  "navCareMap": "Care Map",
+  "navSupport": "Support",
+  "languageLabel": "Language",
+  "languageSubtitle": "Choose the app language for this mother's profile",
+  "dailyCareTrackers": "Daily Care Trackers",
+  "wetDiapers": "Wet diapers",
+  "soiledDiapers": "Soiled diapers",
+  "waterGlasses": "Mama's water (glasses)",
+  "wetDiaperGoal": "Aim for {target}+ heavy wet diapers per 24 hours.",
+  "@wetDiaperGoal": {
+    "placeholders": {
+      "target": {
+        "type": "int"
+      }
+    }
+  },
+  "wetDiaperGood": "Great: {count} wet diapers today shows good milk intake.",
+  "@wetDiaperGood": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "partnerModeButton": "Partner Mode: How to Help Right Now",
+  "partnerTitle": "How to Help Right Now",
+  "partnerBriefingTitle": "30-second briefing",
+  "partnerChecklistTitle": "Today's support checklist ({done}/{total})",
+  "@partnerChecklistTitle": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "redFlagTitle": "Red-flag watchlist",
+  "redFlagCall": "If you notice any of these, call the maternal helpline 1190 or go to the nearest facility now.",
+  "close": "Close",
+  "partnerTaskWater": "Refill a 1L water bottle at the nursing station",
+  "partnerTaskSleep": "Protect Mama's 4-hour unbroken sleep block",
+  "partnerTaskBurp": "Handle burping & diaper change after each feed",
+  "partnerTaskMeal": "Prepare a warm meal and a snack she can eat one-handed",
+  "partnerTaskNight": "Take one night feed handover (bring baby, then settle baby)",
+  "partnerTaskVisitors": "Gently manage visitors so Mama can rest",
+  "redFlag1": "Severe headache that will not go away, or blurred vision (possible postpartum pre-eclampsia)",
+  "redFlag2": "Soaking a pad in under an hour, or passing large clots (heavy bleeding)",
+  "redFlag3": "Fever of 38°C or higher, or foul-smelling discharge",
+  "redFlag4": "Chest pain, trouble breathing, or one swollen painful leg",
+  "redFlag5": "Hopelessness, withdrawal, not eating, or talk of self-harm (needs support today)",
+  "briefingEarly": "Week {week}. The first two weeks are the hardest: {baby} feeds very often and {mama} is recovering from birth. Your job right now: take the load off, so she can feed, heal and sleep.",
+  "@briefingEarly": {
+    "placeholders": {
+      "week": {
+        "type": "int"
+      },
+      "baby": {
+        "type": "String"
+      },
+      "mama": {
+        "type": "String"
+      }
+    }
+  },
+  "briefingMid": "Week {week}. {baby} is feeding very often (cluster feeding is normal) and {mama}'s body is still healing, so she is tired and her mood can swing. Your job right now: take the load off, so she can feed, heal and sleep.",
+  "@briefingMid": {
+    "placeholders": {
+      "week": {
+        "type": "int"
+      },
+      "baby": {
+        "type": "String"
+      },
+      "mama": {
+        "type": "String"
+      }
+    }
+  },
+  "briefingLate": "Week {week}. {baby} is settling into a rhythm, but {mama} is still recovering and may be running on little sleep. Your job right now: take the load off, so she can feed, heal and sleep.",
+  "@briefingLate": {
+    "placeholders": {
+      "week": {
+        "type": "int"
+      },
+      "baby": {
+        "type": "String"
+      },
+      "mama": {
+        "type": "String"
+      }
+    }
+  }
+}

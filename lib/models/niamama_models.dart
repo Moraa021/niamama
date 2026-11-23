@@ -15,6 +15,7 @@ class MotherTenantProfile {
   final String pinCode;
   final bool requirePinEveryTime;
   final String avatarColorHex;
+  final String languageCode; // 'en' | 'sw'
 
   const MotherTenantProfile({
     required this.id,
@@ -27,6 +28,7 @@ class MotherTenantProfile {
     required this.pinCode,
     this.requirePinEveryTime = false,
     this.avatarColorHex = '#3E644A',
+    this.languageCode = 'en',
   });
 
   String get mamaFirstName => mamaName.split(' ').first;
@@ -50,6 +52,7 @@ class MotherTenantProfile {
     String? babyDob,
     String? whoPassId,
     String? pinCode,
+    String? languageCode,
     bool? requirePinEveryTime,
     String? avatarColorHex,
   }) {
@@ -64,6 +67,7 @@ class MotherTenantProfile {
       pinCode: pinCode ?? this.pinCode,
       requirePinEveryTime: requirePinEveryTime ?? this.requirePinEveryTime,
       avatarColorHex: avatarColorHex ?? this.avatarColorHex,
+      languageCode: languageCode ?? this.languageCode,
     );
   }
 
@@ -79,6 +83,7 @@ class MotherTenantProfile {
             PinHasher.isHashed(pinCode) ? pinCode : PinHasher.hash(pinCode),
         'requirePinEveryTime': requirePinEveryTime,
         'avatarColorHex': avatarColorHex,
+        'languageCode': languageCode,
       };
 
   factory MotherTenantProfile.fromJson(Map<String, dynamic> json) =>
@@ -93,6 +98,7 @@ class MotherTenantProfile {
         pinCode: json['pinCode'] as String? ?? '1234',
         requirePinEveryTime: json['requirePinEveryTime'] as bool? ?? false,
         avatarColorHex: json['avatarColorHex'] as String? ?? '#3E644A',
+        languageCode: json['languageCode'] as String? ?? 'en',
       );
 
   static const List<MotherTenantProfile> defaultTenants = [

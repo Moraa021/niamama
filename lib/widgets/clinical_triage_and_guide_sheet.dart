@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/location_service.dart';
 import '../services/neo4j_knowledge_service.dart';
+import '../services/triage_translations_sw.dart';
 import '../theme/nurture_bloom_theme.dart';
 
 class Neo4jClinicalTriageSheet extends StatefulWidget {
@@ -9,6 +10,7 @@ class Neo4jClinicalTriageSheet extends StatefulWidget {
   final VoidCallback onOpenSpeedDial;
   final VoidCallback onOpenSafeChat;
   final void Function(String message) onShowToast;
+  final String languageCode;
 
   const Neo4jClinicalTriageSheet({
     super.key,
@@ -17,6 +19,7 @@ class Neo4jClinicalTriageSheet extends StatefulWidget {
     required this.onOpenSpeedDial,
     required this.onOpenSafeChat,
     required this.onShowToast,
+    this.languageCode = 'en',
   });
 
   @override
@@ -174,8 +177,12 @@ class _Neo4jClinicalTriageSheetState extends State<Neo4jClinicalTriageSheet> {
               itemCount: nodes.length,
               separatorBuilder: (_, __) => const SizedBox(height: 12),
               itemBuilder: (context, idx) {
-                final node = nodes[idx];
-                final isUrgent = node.urgencyLevel == 'URGENT ER';
+                final original = nodes[idx];
+                final isUrgent = original.urgencyLevel == 'URGENT ER';
+                final node = localizeTriageNode(original, widget.languageCode);
+                final categoryLabel = widget.languageCode == 'sw'
+                    ? (categoryLabelsSw[node.category] ?? node.category)
+                    : node.category;
                 return Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -205,7 +212,7 @@ class _Neo4jClinicalTriageSheetState extends State<Neo4jClinicalTriageSheet> {
                               borderRadius: BorderRadius.circular(999),
                             ),
                             child: Text(
-                              '${node.category.toUpperCase()} • ${node.urgencyLevel}',
+                              '${categoryLabel.toUpperCase()} • ${node.urgencyLevel}',
                               style: NurtureBloomTextStyles.labelSm.copyWith(
                                 color: isUrgent
                                     ? NurtureBloomColors.onTertiaryFixed

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../models/niamama_models.dart';
 import '../theme/nurture_bloom_theme.dart';
 
@@ -16,6 +17,7 @@ class DailyTrackersCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
     final wetOk = state.wetDiapers >= NiamamaState.wetDiaperTarget;
     return Container(
       padding: const EdgeInsets.all(16),
@@ -27,12 +29,12 @@ class DailyTrackersCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Daily Care Trackers', style: NurtureBloomTextStyles.headlineSm),
+          Text(l.dailyCareTrackers, style: NurtureBloomTextStyles.headlineSm),
           const SizedBox(height: 4),
           Text(
             wetOk
-                ? 'Great: ${state.wetDiapers} wet diapers today shows good milk intake.'
-                : 'Aim for ${NiamamaState.wetDiaperTarget}+ heavy wet diapers per 24 hours.',
+                ? l.wetDiaperGood(state.wetDiapers)
+                : l.wetDiaperGoal(NiamamaState.wetDiaperTarget),
             style: NurtureBloomTextStyles.bodySm.copyWith(
               color: wetOk
                   ? NurtureBloomColors.primary
@@ -41,20 +43,20 @@ class DailyTrackersCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           _Stepper(
-            label: 'Wet diapers',
+            label: l.wetDiapers,
             icon: Icons.water_drop_rounded,
             value: state.wetDiapers,
             target: NiamamaState.wetDiaperTarget,
             onChanged: (v) => onChanged(wet: v),
           ),
           _Stepper(
-            label: 'Soiled diapers',
+            label: l.soiledDiapers,
             icon: Icons.baby_changing_station_rounded,
             value: state.soiledDiapers,
             onChanged: (v) => onChanged(soiled: v),
           ),
           _Stepper(
-            label: "Mama's water (glasses)",
+            label: l.waterGlasses,
             icon: Icons.local_drink_rounded,
             value: state.waterGlasses,
             target: NiamamaState.waterGlassTarget,
