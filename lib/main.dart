@@ -1,3 +1,4 @@
+import 'widgets/partner_copilot_sheet.dart';
 import 'widgets/safe_avatar.dart';
 import 'package:flutter/material.dart';
 import 'models/niamama_models.dart';
@@ -392,6 +393,26 @@ class _NiamamaShellScreenState extends State<NiamamaShellScreen>
     );
   }
 
+  void _openPartnerCopilot() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => PartnerCopilotSheet(
+        tenant: _activeTenant,
+        checklist: _state.partnerChecklist,
+        onToggleTask: (id, done) {
+          _updateState(
+            _state.copyWith(
+              partnerChecklist: {..._state.partnerChecklist, id: done},
+              countsDate: NiamamaState.todayKey(),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   void _openClinicalTriage() {
     showModalBottomSheet(
       context: context,
@@ -673,6 +694,17 @@ class _NiamamaShellScreenState extends State<NiamamaShellScreen>
                 'Saved offline: ${entry.side} side (${entry.durationMinutes}m) for Baby ${_activeTenant.babyName}',
               );
             },
+            onUpdateDailyCounts: ({wet, soiled, water}) {
+              _updateState(
+                _state.copyWith(
+                  wetDiapers: wet,
+                  soiledDiapers: soiled,
+                  waterGlasses: water,
+                  countsDate: NiamamaState.todayKey(),
+                ),
+              );
+            },
+            onOpenPartnerCopilot: _openPartnerCopilot,
             onRequestLocation: _requestLiveLocation,
             onNavigateTab: (idx) => setState(() => _activeTabIndex = idx),
             onOpenWhoPass: _openWhoDigitalPass,
@@ -746,6 +778,7 @@ class _NiamamaShellScreenState extends State<NiamamaShellScreen>
               );
             },
             onOpenSafeChat: _openSafeChat,
+            onOpenPartnerCopilot: _openPartnerCopilot,
             onOpenSpeedDial: _openEmergencySpeedDial,
             onOpenCareGuide: _openCareGuide,
             onShowToast: _showToast,

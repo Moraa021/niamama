@@ -1,3 +1,4 @@
+import '../widgets/daily_trackers_card.dart';
 import 'package:flutter/material.dart';
 import '../models/niamama_models.dart';
 import '../services/location_service.dart';
@@ -15,6 +16,8 @@ class HomeDashboardScreen extends StatelessWidget {
   final VoidCallback onOpenTenantSecurity;
   final void Function(String mood, String label) onSelectMood;
   final void Function(FeedLogEntry entry) onLogFeed;
+  final void Function({int? wet, int? soiled, int? water}) onUpdateDailyCounts;
+  final VoidCallback onOpenPartnerCopilot;
   final VoidCallback onRequestLocation;
   final void Function(int tabIndex) onNavigateTab;
   final VoidCallback onOpenWhoPass;
@@ -36,6 +39,8 @@ class HomeDashboardScreen extends StatelessWidget {
     required this.onOpenTenantSecurity,
     required this.onSelectMood,
     required this.onLogFeed,
+    required this.onUpdateDailyCounts,
+    required this.onOpenPartnerCopilot,
     required this.onRequestLocation,
     required this.onNavigateTab,
     required this.onOpenWhoPass,
@@ -966,6 +971,18 @@ class HomeDashboardScreen extends StatelessWidget {
                 label: const Text('Log'),
               ),
             ],
+          ),
+        ),
+        const SizedBox(height: 14),
+        DailyTrackersCard(state: state, onChanged: onUpdateDailyCounts),
+        const SizedBox(height: 12),
+        SizedBox(
+          width: double.infinity,
+          height: 48,
+          child: OutlinedButton.icon(
+            onPressed: onOpenPartnerCopilot,
+            icon: const Icon(Icons.volunteer_activism_rounded),
+            label: const Text('Partner Mode: How to Help Right Now'),
           ),
         ),
         const SizedBox(height: 18),

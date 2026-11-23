@@ -11,6 +11,7 @@ class SupportCircleScreen extends StatelessWidget {
   final String babyName;
   final void Function(String circleId) onToggleCircle;
   final VoidCallback onOpenSafeChat;
+  final VoidCallback onOpenPartnerCopilot;
   final VoidCallback onOpenSpeedDial;
   final void Function(String guideId) onOpenCareGuide;
   final void Function(String message) onShowToast;
@@ -23,6 +24,7 @@ class SupportCircleScreen extends StatelessWidget {
     required this.babyName,
     required this.onToggleCircle,
     required this.onOpenSafeChat,
+    required this.onOpenPartnerCopilot,
     required this.onOpenSpeedDial,
     required this.onOpenCareGuide,
     required this.onShowToast,
@@ -91,6 +93,16 @@ class SupportCircleScreen extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ),
+        const SizedBox(height: 14),
+        SizedBox(
+          width: double.infinity,
+          height: 48,
+          child: OutlinedButton.icon(
+            onPressed: onOpenPartnerCopilot,
+            icon: const Icon(Icons.volunteer_activism_rounded),
+            label: const Text('Partner Mode: How to Help Right Now'),
           ),
         ),
         const SizedBox(height: 18),

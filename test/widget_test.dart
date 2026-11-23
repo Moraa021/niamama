@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:niamama/models/niamama_models.dart';
 import 'package:niamama/services/neo4j_knowledge_service.dart';
 import 'package:niamama/services/offline_vault_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -86,4 +87,44 @@ void main() {
       expect(guidance.cypherCitation, contains(':Symptom'));
     },
   );
+
+  test('Daily diaper/water trackers and partner checklist persist per tenant',
+      () async {
+    final tenants = await OfflineVaultService.loadTenants();
+    final amara = tenants[0];
+    final wanjiku = tenants[1];
+
+    final base = await OfflineVaultService.loadState(tenant: amara);
+    await OfflineVaultService.saveState(
+      base.copyWith(
+        wetDiapers: 6,
+        soiledDiapers: 2,
+        waterGlasses: 5,
+        partnerChecklist: {'water': true},
+      ),
+      tenantId: amara.id,
+    );
+
+    final reloaded = await OfflineVaultService.loadState(tenant: amara);
+    expect(reloaded.wetDiapers, 6);
+    expect(reloaded.soiledDiapers, 2);
+    expect(reloaded.waterGlasses, 5);
+    expect(reloaded.partnerChecklist['water'], isTrue);
+
+    final other = await OfflineVaultService.loadState(tenant: wanjiku);
+    expect(other.wetDiapers, 0);
+    expect(other.partnerChecklist, isEmpty);
+  });
+
+  test('Daily trackers reset on a new calendar day', () async {
+    final amara = (await OfflineVaultService.loadTenants())[0];
+    final base = await OfflineVaultService.loadState(tenant: amara);
+    await OfflineVaultService.saveState(
+      base.copyWith(wetDiapers: 7, countsDate: '2000-01-01'),
+      tenantId: amara.id,
+    );
+    final reloaded = await OfflineVaultService.loadState(tenant: amara);
+    expect(reloaded.wetDiapers, 0);
+    expect(reloaded.countsDate, NiamamaState.todayKey());
+  });
 }

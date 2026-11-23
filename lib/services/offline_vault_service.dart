@@ -99,6 +99,8 @@ class OfflineVaultService {
       final contactsRaw = data['contacts'] as List<dynamic>?;
       final chatRaw = data['chatMessages'] as List<dynamic>?;
 
+      final sameDay = data['countsDate'] == NiamamaState.todayKey();
+
       return NiamamaState(
         isBabyLeoActive: data['isBabyLeoActive'] as bool? ?? true,
         lastMood: data['lastMood'] as String?,
@@ -146,6 +148,16 @@ class OfflineVaultService {
                 data['cachedCoordinates'] as Map<String, dynamic>,
               )
             : null,
+        // Daily trackers reset on a new calendar day.
+        wetDiapers: sameDay ? (data['wetDiapers'] as num?)?.toInt() ?? 0 : 0,
+        soiledDiapers:
+            sameDay ? (data['soiledDiapers'] as num?)?.toInt() ?? 0 : 0,
+        waterGlasses:
+            sameDay ? (data['waterGlasses'] as num?)?.toInt() ?? 0 : 0,
+        partnerChecklist: sameDay
+            ? _decodeBoolMap(data['partnerChecklist'], const {})
+            : const {},
+        countsDate: NiamamaState.todayKey(),
       );
     } catch (_) {
       return NiamamaState.initial(tenant: activeTenant);
@@ -175,6 +187,11 @@ class OfflineVaultService {
         'joinedCircles': state.joinedCircles,
         'chatMessages': state.chatMessages.map((e) => e.toJson()).toList(),
         'cachedCoordinates': state.cachedCoordinates?.toJson(),
+        'wetDiapers': state.wetDiapers,
+        'soiledDiapers': state.soiledDiapers,
+        'waterGlasses': state.waterGlasses,
+        'partnerChecklist': state.partnerChecklist,
+        'countsDate': state.countsDate,
       };
       await prefs.setString(
         _vaultKeyForTenant(targetTenantId),

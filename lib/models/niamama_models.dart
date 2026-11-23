@@ -349,6 +349,22 @@ class NiamamaState {
   final List<ChatMessage> chatMessages;
   final UserCoordinates? cachedCoordinates;
 
+  /// Daily trackers (reset when [countsDate] differs from today).
+  final int wetDiapers;
+  final int soiledDiapers;
+  final int waterGlasses;
+  final Map<String, bool> partnerChecklist;
+  final String countsDate; // yyyy-mm-dd
+
+  static String todayKey([DateTime? now]) {
+    final d = now ?? DateTime.now();
+    return '${d.year.toString().padLeft(4, '0')}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
+  }
+
+  /// Clinical target: 6+ heavy wet diapers per 24h indicates adequate milk intake.
+  static const int wetDiaperTarget = 6;
+  static const int waterGlassTarget = 8;
+
   const NiamamaState({
     required this.isBabyLeoActive,
     required this.lastMood,
@@ -363,6 +379,11 @@ class NiamamaState {
     required this.joinedCircles,
     required this.chatMessages,
     this.cachedCoordinates,
+    this.wetDiapers = 0,
+    this.soiledDiapers = 0,
+    this.waterGlasses = 0,
+    this.partnerChecklist = const {},
+    this.countsDate = '',
   });
 
   static List<EmergencyContact> get defaultContacts => const [
@@ -450,6 +471,7 @@ class NiamamaState {
         ),
       ],
       cachedCoordinates: null,
+      countsDate: todayKey(),
     );
   }
 
@@ -467,6 +489,11 @@ class NiamamaState {
     Map<String, bool>? joinedCircles,
     List<ChatMessage>? chatMessages,
     UserCoordinates? cachedCoordinates,
+    int? wetDiapers,
+    int? soiledDiapers,
+    int? waterGlasses,
+    Map<String, bool>? partnerChecklist,
+    String? countsDate,
   }) {
     return NiamamaState(
       isBabyLeoActive: isBabyLeoActive ?? this.isBabyLeoActive,
@@ -484,6 +511,11 @@ class NiamamaState {
       joinedCircles: joinedCircles ?? this.joinedCircles,
       chatMessages: chatMessages ?? this.chatMessages,
       cachedCoordinates: cachedCoordinates ?? this.cachedCoordinates,
+      wetDiapers: wetDiapers ?? this.wetDiapers,
+      soiledDiapers: soiledDiapers ?? this.soiledDiapers,
+      waterGlasses: waterGlasses ?? this.waterGlasses,
+      partnerChecklist: partnerChecklist ?? this.partnerChecklist,
+      countsDate: countsDate ?? this.countsDate,
     );
   }
 }
