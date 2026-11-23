@@ -38,7 +38,9 @@ class _SafeAvatarState extends State<SafeAvatar> {
       backgroundImage: showImage ? NetworkImage(widget.url!) : null,
       onBackgroundImageError: showImage
           ? (_, __) {
-              if (mounted) setState(() => _failed = true);
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (mounted && !_failed) setState(() => _failed = true);
+              });
             }
           : null,
       child: showImage ? null : widget.fallback,

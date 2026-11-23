@@ -789,11 +789,10 @@ class _CareMapScreenState extends State<CareMapScreen> {
               const SizedBox(height: 12),
 
               // Collapsible Accordion
-              Container(
-                decoration: BoxDecoration(
-                  color: NurtureBloomColors.surfaceContainerLowest,
-                  borderRadius: BorderRadius.circular(14),
-                ),
+              Material(
+                color: NurtureBloomColors.surfaceContainerLowest,
+                borderRadius: BorderRadius.circular(14),
+                clipBehavior: Clip.antiAlias,
                 child: Column(
                   children: [
                     ListTile(
