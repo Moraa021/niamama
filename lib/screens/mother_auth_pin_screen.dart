@@ -1,3 +1,4 @@
+import '../l10n/app_localizations.dart';
 import '../services/pin_hasher.dart';
 import 'package:flutter/material.dart';
 import '../models/niamama_models.dart';
@@ -258,6 +259,7 @@ class _MotherAuthPinScreenState extends State<MotherAuthPinScreen> {
 
   /// Shown when a mother is already logged in on this device and has PIN-on-every-access enabled.
   Widget _buildLockedSessionPinCard(MotherTenantProfile lockedTenant) {
+    final l = AppLocalizations.of(context)!;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -287,13 +289,13 @@ class _MotherAuthPinScreenState extends State<MotherAuthPinScreen> {
         ),
         const SizedBox(height: 12),
         Text(
-          'Welcome back, ${lockedTenant.mamaFirstName}',
+          l.enterPinTitle(lockedTenant.mamaFirstName),
           style: NurtureBloomTextStyles.headlineLgMobile,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 4),
         Text(
-          'Enter your 4-digit PIN to unlock your session.',
+          l.enterPinSubtitle,
           style: NurtureBloomTextStyles.bodySm,
           textAlign: TextAlign.center,
         ),
@@ -412,6 +414,7 @@ class _MotherAuthPinScreenState extends State<MotherAuthPinScreen> {
 
   /// Blind Sign-In Card: Never displays other accounts or user count.
   Widget _buildPrivateSignInCard() {
+    final l = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
@@ -449,12 +452,12 @@ class _MotherAuthPinScreenState extends State<MotherAuthPinScreen> {
           ),
           const SizedBox(height: 12),
           Text(
-            'Sign In to Your Vault',
+            l.signInTitle,
             style: NurtureBloomTextStyles.headlineLgMobile,
           ),
           const SizedBox(height: 4),
           Text(
-            'Enter your phone number and 4-digit PIN. Your session will be saved on this device.',
+            l.signInSubtitle,
             style: NurtureBloomTextStyles.bodySm,
           ),
           const SizedBox(height: 18),
@@ -462,7 +465,7 @@ class _MotherAuthPinScreenState extends State<MotherAuthPinScreen> {
             controller: _identifierCtrl,
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
-              labelText: 'Phone Number or Registered Name',
+              labelText: l.phoneOrNameLabel,
               prefixIcon: const Icon(Icons.phone_iphone_rounded, size: 20),
               filled: true,
               fillColor: NurtureBloomColors.surface,
@@ -555,7 +558,7 @@ class _MotherAuthPinScreenState extends State<MotherAuthPinScreen> {
                 elevation: 0,
               ),
               icon: const Icon(Icons.login_rounded, size: 18),
-              label: const Text('Sign In'),
+              label: Text(l.signInBtn),
             ),
           ),
           const SizedBox(height: 10),
@@ -568,7 +571,7 @@ class _MotherAuthPinScreenState extends State<MotherAuthPinScreen> {
                 });
               },
               icon: const Icon(Icons.person_add_alt_1_rounded, size: 18),
-              label: const Text('New Mother? Create Your Private Account'),
+              label: Text(l.newMotherBtn),
             ),
           ),
         ],
@@ -648,6 +651,7 @@ class _MotherAuthPinScreenState extends State<MotherAuthPinScreen> {
   }
 
   Widget _buildRegisterCard() {
+    final l = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -663,7 +667,7 @@ class _MotherAuthPinScreenState extends State<MotherAuthPinScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Create Private Account',
+                l.newMotherTitle,
                 style: NurtureBloomTextStyles.headlineMd,
               ),
               IconButton(
@@ -676,14 +680,14 @@ class _MotherAuthPinScreenState extends State<MotherAuthPinScreen> {
             ],
           ),
           Text(
-            'Set up your personal maternal & infant care companion.',
+            l.newMotherSubtitle,
             style: NurtureBloomTextStyles.bodySm,
           ),
           const SizedBox(height: 16),
           TextField(
             controller: _mamaNameCtrl,
             decoration: InputDecoration(
-              labelText: "Your Full Name",
+              labelText: l.mamaNameLabel,
               filled: true,
               fillColor: NurtureBloomColors.surface,
               border: OutlineInputBorder(
@@ -823,7 +827,7 @@ class _MotherAuthPinScreenState extends State<MotherAuthPinScreen> {
                 shape: const StadiumBorder(),
               ),
               icon: const Icon(Icons.check_circle_rounded, size: 18),
-              label: const Text('Create Account & Sign In'),
+              label: Text(l.createAccountBtn),
             ),
           ),
         ],

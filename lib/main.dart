@@ -383,6 +383,7 @@ class _NiamamaShellScreenState extends State<NiamamaShellScreen>
             userText: text,
             mamaFirstName: _activeTenant.mamaFirstName,
             babyName: _activeTenant.babyName,
+            languageCode: _activeTenant.languageCode,
           );
 
           final midwifeReply = ChatMessage(
@@ -549,8 +550,8 @@ class _NiamamaShellScreenState extends State<NiamamaShellScreen>
                             const SizedBox(width: 4),
                             Text(
                               _userCoords.isLiveGps
-                                  ? 'GPS Live'
-                                  : 'Offline Ready',
+                                  ? AppLocalizations.of(context)!.gpsLive
+                                  : AppLocalizations.of(context)!.offlineReady,
                               style: NurtureBloomTextStyles.labelSm.copyWith(
                                 fontSize: 10,
                               ),
@@ -583,7 +584,7 @@ class _NiamamaShellScreenState extends State<NiamamaShellScreen>
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                'SOS',
+                                AppLocalizations.of(context)!.sosButton,
                                 style: NurtureBloomTextStyles.labelSm.copyWith(
                                   color: NurtureBloomColors.onTertiaryFixed,
                                 ),

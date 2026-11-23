@@ -81,6 +81,7 @@ class _TenantSecuritySheetState extends State<TenantSecuritySheet> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
     final tenant = widget.activeTenant;
 
     return Container(
@@ -203,11 +204,11 @@ class _TenantSecuritySheetState extends State<TenantSecuritySheet> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Private Maternal Vault',
+                          l.securityVaultTitle,
                           style: NurtureBloomTextStyles.labelMd,
                         ),
                         Text(
-                          'Your nursing logs, vaccines, calendar reminders, emergency speed-dial contacts, and midwife chats are stored privately in your personal encrypted session.',
+                          l.securityVaultDescription,
                           style: NurtureBloomTextStyles.bodySm.copyWith(
                             fontSize: 12,
                           ),
@@ -245,13 +246,13 @@ class _TenantSecuritySheetState extends State<TenantSecuritySheet> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Require PIN on Every Access',
+                              l.requirePinTitle,
                               style: NurtureBloomTextStyles.labelLg,
                             ),
                             Text(
                               _requirePinEveryTime
-                                  ? 'ON: You will be asked for your 4-digit PIN every time you open or resume Niamama.'
-                                  : 'OFF: Your login session stays saved so you open straight to your dashboard.',
+                                  ? l.requirePinSubtitleOn
+                                  : l.requirePinSubtitleOff,
                               style: NurtureBloomTextStyles.bodySm.copyWith(
                                 fontSize: 12,
                               ),
@@ -278,7 +279,7 @@ class _TenantSecuritySheetState extends State<TenantSecuritySheet> {
                         onPressed: () =>
                             setState(() => _isEditingPin = !_isEditingPin),
                         icon: const Icon(Icons.edit_rounded, size: 16),
-                        label: Text(_isEditingPin ? 'Cancel' : 'Change PIN'),
+                        label: Text(_isEditingPin ? l.cancel : l.changePin),
                       ),
                     ],
                   ),
@@ -293,7 +294,7 @@ class _TenantSecuritySheetState extends State<TenantSecuritySheet> {
                             maxLength: 4,
                             obscureText: true,
                             decoration: InputDecoration(
-                              hintText: 'New 4-digit PIN',
+                              hintText: l.enterNewPinHint,
                               counterText: '',
                               errorText: _pinError,
                               filled: true,
@@ -314,7 +315,7 @@ class _TenantSecuritySheetState extends State<TenantSecuritySheet> {
                             foregroundColor: NurtureBloomColors.onPrimary,
                             shape: const StadiumBorder(),
                           ),
-                          child: const Text('Save PIN'),
+                          child: Text(l.savePin),
                         ),
                       ],
                     ),
@@ -338,7 +339,7 @@ class _TenantSecuritySheetState extends State<TenantSecuritySheet> {
                       shape: const StadiumBorder(),
                     ),
                     icon: const Icon(Icons.lock_outline_rounded, size: 18),
-                    label: const Text('Lock Vault Now'),
+                    label: Text(l.lockVaultNow),
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -356,7 +357,7 @@ class _TenantSecuritySheetState extends State<TenantSecuritySheet> {
                       elevation: 0,
                     ),
                     icon: const Icon(Icons.logout_rounded, size: 18),
-                    label: const Text('Sign Out'),
+                    label: Text(l.signOut),
                   ),
                 ),
               ],

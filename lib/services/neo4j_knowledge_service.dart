@@ -1,3 +1,4 @@
+import 'triage_translations_sw.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -306,6 +307,7 @@ class Neo4jKnowledgeGraphService {
   /// the live graph status. Falls back cleanly to offline mirror if unreachable.
   static Future<Neo4jGraphStatus> connectAndSeedGraph({
     String endpoint = defaultEndpoint,
+    String languageCode = 'en',
   }) async {
     final uri = Uri.parse('$endpoint/db/neo4j/tx/commit');
     final authHeader =
@@ -414,6 +416,7 @@ class Neo4jKnowledgeGraphService {
     required String mamaFirstName,
     required String babyName,
     String endpoint = defaultEndpoint,
+    String languageCode = 'en',
   }) async {
     final combined = '${topics.join(" ")} $userText'.toLowerCase();
 
@@ -483,17 +486,26 @@ class Neo4jKnowledgeGraphService {
       liveVerified = false;
     }
 
-    final sourceBadge =
-        liveVerified ? 'Neo4j Live Graph' : 'Neo4j Offline Graph';
+    final displayNode = localizeTriageNode(matchedNode, languageCode);
+    final sourceBadge = languageCode == 'sw'
+        ? (liveVerified
+            ? 'Mtandao Mubashara wa Neo4j'
+            : 'Mtandao wa Nje ya Mtandao wa Neo4j')
+        : (liveVerified ? 'Neo4j Live Graph' : 'Neo4j Offline Graph');
     final actionBullets =
-        matchedNode.immediateActions.map((a) => '• $a').join('\n');
+        displayNode.immediateActions.map((a) => '• $a').join('\n');
 
-    final reply =
-        'Hi $mamaFirstName, I checked the Niamama Clinical Knowledge Graph for you and Baby $babyName:\n\n'
-        '• Triage Level: ${matchedNode.urgencyLevel} (${matchedNode.symptomTitle})\n'
-        '• Clinical Insight: ${matchedNode.clinicalExplanation}\n'
-        '$actionBullets\n\n'
-        '[$sourceBadge • ${matchedNode.whoCitationCode}]';
+    final reply = languageCode == 'sw'
+        ? 'Hujambo $mamaFirstName, nimeangalia Mwongozo wa Kliniki wa Niamama kwa ajili yako na Mtoto $babyName:\n\n'
+            '• Kiwango cha Uharaka: ${displayNode.urgencyLevel} (${displayNode.symptomTitle})\n'
+            '• Ufafanuzi wa Kliniki: ${displayNode.clinicalExplanation}\n'
+            '$actionBullets\n\n'
+            '[$sourceBadge • ${displayNode.whoCitationCode}]'
+        : 'Hi $mamaFirstName, I checked the Niamama Clinical Knowledge Graph for you and Baby $babyName:\n\n'
+            '• Triage Level: ${displayNode.urgencyLevel} (${displayNode.symptomTitle})\n'
+            '• Clinical Insight: ${displayNode.clinicalExplanation}\n'
+            '$actionBullets\n\n'
+            '[$sourceBadge • ${displayNode.whoCitationCode}]';
 
     return (
       replyText: reply,

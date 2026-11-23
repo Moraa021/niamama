@@ -4,6 +4,11 @@
   "navTimeline": "Ratiba",
   "navCareMap": "Ramani ya Huduma",
   "navSupport": "Msaada",
+  "gpsLive": "GPS Imewashwa",
+  "offlineReady": "Tayari Nje ya Mtandao",
+  "sosButton": "SOS",
+  "close": "Funga",
+  "cancel": "Ghairi",
   "languageLabel": "Lugha",
   "languageSubtitle": "Chagua lugha ya programu kwa wasifu wa mama huyu",
   "dailyCareTrackers": "Ufuatiliaji wa Kila Siku",
@@ -11,14 +16,37 @@
   "soiledDiapers": "Nepi zenye kinyesi",
   "waterGlasses": "Maji ya mama (glasi)",
   "wetDiaperGoal": "Lenga nepi {target}+ zilizolowa vizuri kwa saa 24.",
+  "@wetDiaperGoal": {
+    "placeholders": {
+      "target": {
+        "type": "int"
+      }
+    }
+  },
   "wetDiaperGood": "Vizuri: nepi {count} zilizolowa leo zinaonyesha mtoto anapata maziwa ya kutosha.",
+  "@wetDiaperGood": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "partnerModeButton": "Hali ya Mwenza: Jinsi ya Kusaidia Sasa",
   "partnerTitle": "Jinsi ya Kusaidia Sasa",
   "partnerBriefingTitle": "Muhtasari wa sekunde 30",
   "partnerChecklistTitle": "Orodha ya msaada wa leo ({done}/{total})",
+  "@partnerChecklistTitle": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "redFlagTitle": "Orodha ya dalili hatari",
   "redFlagCall": "Ukiona dalili yoyote kati ya hizi, piga simu ya msaada wa uzazi 1190 au nenda kituo cha afya cha karibu sasa hivi.",
-  "close": "Funga",
   "partnerTaskWater": "Jaza chupa ya maji ya lita 1 mahali pa kunyonyesha",
   "partnerTaskSleep": "Linda usingizi wa mama wa saa 4 bila kukatizwa",
   "partnerTaskBurp": "Msaidie mtoto kutoa gesi na kubadilisha nepi baada ya kila kunyonya",
@@ -31,6 +59,327 @@
   "redFlag4": "Maumivu ya kifua, shida ya kupumua, au mguu mmoja uliovimba na wenye maumivu",
   "redFlag5": "Kukata tamaa, kujitenga, kutokula, au kuzungumza kuhusu kujidhuru (anahitaji msaada leo)",
   "briefingEarly": "Wiki ya {week}. Wiki mbili za kwanza ni ngumu zaidi: {baby} ananyonya mara nyingi na {mama} anapona baada ya kujifungua. Kazi yako sasa: mpunguzie mzigo ili anyonyeshe, apone na apumzike.",
+  "@briefingEarly": {
+    "placeholders": {
+      "week": {
+        "type": "int"
+      },
+      "baby": {
+        "type": "String"
+      },
+      "mama": {
+        "type": "String"
+      }
+    }
+  },
   "briefingMid": "Wiki ya {week}. {baby} ananyonya mara nyingi sana (kunyonya mfululizo ni kawaida) na mwili wa {mama} bado unapona, hivyo amechoka na hisia zake zinaweza kubadilika. Kazi yako sasa: mpunguzie mzigo ili anyonyeshe, apone na apumzike.",
-  "briefingLate": "Wiki ya {week}. {baby} ameanza kuwa na ratiba, lakini {mama} bado anapona na huenda analala kidogo. Kazi yako sasa: mpunguzie mzigo ili anyonyeshe, apone na apumzike."
+  "@briefingMid": {
+    "placeholders": {
+      "week": {
+        "type": "int"
+      },
+      "baby": {
+        "type": "String"
+      },
+      "mama": {
+        "type": "String"
+      }
+    }
+  },
+  "briefingLate": "Wiki ya {week}. {baby} ameanza kuwa na ratiba, lakini {mama} bado anapona na huenda analala kidogo. Kazi yako sasa: mpunguzie mzigo ili anyonyeshe, apone na apumzike.",
+  "@briefingLate": {
+    "placeholders": {
+      "week": {
+        "type": "int"
+      },
+      "baby": {
+        "type": "String"
+      },
+      "mama": {
+        "type": "String"
+      }
+    }
+  },
+  "goodMorning": "Habari ya asubuhi, {name}",
+  "@goodMorning": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "goodAfternoon": "Habari ya mchana, {name}",
+  "@goodAfternoon": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "goodEvening": "Habari ya jioni, {name}",
+  "@goodEvening": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "howAreYouFeeling": "Unajisikiaje kwa sasa?",
+  "moodResting": "Napumzika Vizuri",
+  "moodTired": "Nimechoka Kidogo",
+  "moodMidwife": "Uliza Mkunga",
+  "dailyBreathTitle": "PUMZIKO LA LEO",
+  "dailyBreathQuote": "“Unafanya kazi nzuri leo. Kila unyonyeshaji, kumkumbatia mtoto, na kila pumzi tulivu vina thamani kubwa.”",
+  "careHorizon": "Upeo wa Huduma",
+  "sixWeeksReviewTitle": "Uchunguzi wa Wiki 6 Baada ya Kujifungua",
+  "sixWeeksReviewSubtitle": "Uchunguzi wa Mama Unaopendekezwa na WHO",
+  "sixWeeksReviewDesc": "Kurejea kwa mfuko wa uzazi, tathmini ya hisia na uponyaji wa nyonga.",
+  "babyVaccinesHorizonTitle": "Chanjo za Wiki 6 za Mtoto {babyName}",
+  "@babyVaccinesHorizonTitle": {
+    "placeholders": {
+      "babyName": {
+        "type": "String"
+      }
+    }
+  },
+  "babyVaccinesHorizonSubtitle": "Penta 1, PCV 1, OPV 1, Rotavirus 1",
+  "babyVaccinesHorizonDesc": "Kinga kwa ajili ya mapafu, mmeng'enyo wa chakula na afya ya mtoto.",
+  "lastFeed": "Kunyonyesha Mara ya Mwisho",
+  "log": "Rekodi",
+  "essentialCareSupport": "Huduma Muhimu na Msaada",
+  "whenToSeeDoctor": "Wakati wa Kumuona Daktari",
+  "whenToSeeDoctorDesc": "Mwongozo wa WHO wa Dalili Hatari",
+  "pediatricCenters": "Vituo vya Watoto",
+  "pediatricCentersDesc": "Wodi za Dharura na Ustawi wa Mtoto",
+  "talkWithMidwife": "Ongea na Mkunga",
+  "talkWithMidwifeDesc": "Salama, Siri na Nje ya Mtandao",
+  "whoVaccineCard": "Kadi ya Chanjo ya WHO",
+  "whoVaccineCardDesc": "Kadi ya Kidijitali ya Chanjo",
+  "nearestReadyFacility": "KITUO CHA KARIBU KILICHO TAYARI",
+  "callMidwifeTriage": "Piga Dawati la Mkunga",
+  "viewRouteNav": "Angalia Njia na Ramani",
+  "communityWisdom": "Hekima ya Jamii • Gusa Kusoma Mwongozo",
+  "firstSmileMilestone": "Tabasamu la kwanza: Dalili za kuangalia wiki 6 hadi 8",
+  "quickFeedLoggerTitle": "Kumbukumbu ya Kunyonyesha na Usingizi",
+  "quickFeedLoggerSubtitle": "Kufuatilia kunyonyesha kwa mkono mmoja • Imehifadhiwa nje ya mtandao",
+  "nursingSide": "Upande wa Kunyonyesha",
+  "nursingDuration": "Muda wa Kunyonyesha",
+  "minutesCount": "Dakika {count}",
+  "@minutesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sleepStretch": "Muda wa Usingizi wa Mtoto {babyName}",
+  "@sleepStretch": {
+    "placeholders": {
+      "babyName": {
+        "type": "String"
+      }
+    }
+  },
+  "hoursMins": "Saa {hours} dk {mins}",
+  "@hoursMins": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "mins": {
+        "type": "int"
+      }
+    }
+  },
+  "saveToOfflineVault": "Hifadhi Nje ya Mtandao",
+  "leftSide": "Upande wa Kushoto",
+  "rightSide": "Upande wa Kulia",
+  "facilityDistDrive": "Umbali wa km {dist} • Takriban dk {mins} kwa gari",
+  "@facilityDistDrive": {
+    "placeholders": {
+      "dist": {
+        "type": "String"
+      },
+      "mins": {
+        "type": "int"
+      }
+    }
+  },
+  "open247LowWait": "Wazi Saa 24/7 • Foleni Ndogo",
+  "securityVaultTitle": "Hifadhi Binafsi ya Mama",
+  "securityVaultDescription": "Kumbukumbu zako za unyonyeshaji, chanjo, vikumbusho, nambari za dharura na mazungumzo na mkunga huhifadhiwa kwa usalama kwenye kipindi chako kilichosimbwa.",
+  "requirePinTitle": "Dai PIN Kila Unapofungua",
+  "requirePinSubtitleOn": "IMEWASHWA: Utaombwa PIN yako ya tarakimu 4 kila unapofungua Niamama.",
+  "requirePinSubtitleOff": "IMEZIMWA: Kipindi chako kimehifadhiwa ili ufungue dashibodi moja kwa moja.",
+  "securityPinTitle": "PIN ya Tarakimu 4",
+  "securityPinSubtitle": "Hutumika kufungua hifadhi yako na rekodi nyeti",
+  "changePin": "Badilisha PIN",
+  "savePin": "Hifadhi PIN",
+  "lockVaultNow": "Funga Hifadhi Sasa",
+  "signOut": "Ondoka",
+  "enterNewPinHint": "Weka PIN mpya ya tarakimu 4",
+  "whoCard": "Kadi ya WHO",
+  "childProfileActive": "Wasifu wa mtoto: Mtoto {babyName} (wiki {weeks})",
+  "@childProfileActive": {
+    "placeholders": {
+      "babyName": {
+        "type": "String"
+      },
+      "weeks": {
+        "type": "int"
+      }
+    }
+  },
+  "nextStepInDays": "Hatua Inayofuata Baada ya Siku {days}",
+  "@nextStepInDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "sixWeekImmunizations": "Chanjo za Wiki 6",
+  "sixWeekImmDesc": "Kinga kwa ajili ya mapafu, mmeng'enyo wa chakula na afya ya mtoto.",
+  "tummyTimeTitle": "Muda wa Kulala kwa Tumbo na Tabasamu",
+  "tummyTimeSubtitle": "Kujenga nguvu za shingo na mawasiliano ya hisia",
+  "tummyTimeWindow": "Kipindi cha Wiki ya {week}",
+  "@tummyTimeWindow": {
+    "placeholders": {
+      "week": {
+        "type": "int"
+      }
+    }
+  },
+  "startTummyTimer": "Anzisha Kipima Muda (dk 2)",
+  "pauseTimer": "Sitisha Kipima Muda",
+  "captureSmileMemory": "Rekodi Tabasamu la Kwanza",
+  "smilesLogged": "Tabasamu {count} Zimeripotiwa",
+  "@smilesLogged": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cuesToNotice": "Dalili kwamba {babyName} anajaribu kuwasiliana:",
+  "@cuesToNotice": {
+    "placeholders": {
+      "babyName": {
+        "type": "String"
+      }
+    }
+  },
+  "cueGaze": "Kukukazia macho kwa uangalifu",
+  "cueMouth": "Kulegeza mdomo na kufungua midomo",
+  "cueBrows": "Nyusi zilizotulia na kugeukia sauti",
+  "immunizationTimeline": "Ratiba ya Chanjo",
+  "globalStandard": "Kiwango cha Kimataifa",
+  "birthDosesTitle": "Dozi za Kuzaliwa (Wiki 0)",
+  "birthDosesSubtitle": "Hupewa mtoto anapozaliwa",
+  "week6DosesTitle": "Dozi za Wiki 6",
+  "week6DosesSubtitle": "Chanjo kuu za awali",
+  "week10DosesTitle": "Dozi za Nyongeza za Wiki 10",
+  "week10DosesSubtitle": "Awamu ya pili ya kinga",
+  "week14DosesTitle": "Dozi za Wiki 14",
+  "week14DosesSubtitle": "Awamu ya mwisho ya msingi ya mtoto",
+  "comfortTipsTitle": "Vidokezo vya kumfariji {babyName}",
+  "@comfortTipsTitle": {
+    "placeholders": {
+      "babyName": {
+        "type": "String"
+      }
+    }
+  },
+  "tipBreastfeed": "Mnyonyeshe mtoto mara tu baada ya chanjo ili kutuliza maumivu",
+  "tipSkinToSkin": "Mshike ngozi kwa ngozi kifuani ili kutuliza mapigo ya moyo",
+  "tipCoolCloth": "Weka kitambaa safi chenye maji baridi paja likiwa na joto",
+  "trustedCareNearYou": "Huduma za Kuaminika Karibu Nawe",
+  "trustedCareSubtitle": "Wodi za uzazi zilizothibitishwa, huduma ya watoto wachanga, na kliniki.",
+  "filterAll": "Vituo Vyote",
+  "filterMaternity": "Uzazi Saa 24",
+  "filterPediatric": "Wodi za Watoto",
+  "filterVaccine": "Kliniki za Chanjo",
+  "filterMidwife": "Chini ya Mkunga",
+  "filterPharmacy": "Famasi Saa 24",
+  "allowGps": "Ruhusu GPS",
+  "locatingGps": "Inatafuta GPS...",
+  "emergencyGuidanceTitle": "Wakati wa kutafuta huduma ya dharura mara moja",
+  "emergencyInstinctQuote": "Unamjua mtoto wako vizuri zaidi. Ukihisi wasiwasi wowote, amini silika yako ya kimama—wahudumu wa afya wapo kukusaidia bila kukuhukumu.",
+  "openEmergencySpeedDialSos": "Fungua Simu za Dharura na GPS SOS",
+  "lateNightPharmaciesTitle": "Unatafuta famasi za usiku?",
+  "lateNightPharmaciesDesc": "Tumekuwekea famasi za saa 24 zenye ORS ya watoto, maji safi na vifaa vya kunyonya maziwa.",
+  "viewOpenChemists": "Ona Famasi Zilizofunguliwa",
+  "callHelpline": "Piga Simu ya Taifa ya Uzazi Saa 24 (Bure)",
+  "supportCircleTitle": "Mzunguko Wako wa Msaada",
+  "supportCircleSubtitle": "Hauko peke yako baada ya kujifungua. Wakunga wako, akina mama wenzako, na wataalamu wa afya wapo pamoja nawe.",
+  "midwifeSarahTitle": "Mkunga Aliyesajiliwa Sarah",
+  "midwifeOnline": "Yuko mtandaoni • Majibu chini ya dk 5",
+  "free247": "Bure • Saa 24/7",
+  "midwifeSarahQuote": "“Una wasiwasi kuhusu maumivu ya kunyonyesha usiku, mabadiliko ya kupona, au usingizi wa mtoto? Hakuna swali dogo au la aibu. Tuko hapa kukusikiliza.”",
+  "privateAdvice": "Ushauri wa siri na unaofanya kazi hata nje ya mtandao",
+  "startSafeChat": "Anzisha Mazungumzo Salama",
+  "voiceCall": "Piga Simu ya Sauti",
+  "immediateLovedOnes": "Watu wa Karibu na Wanaokujali",
+  "speedDialButton": "Simu za Haraka",
+  "communityCirclesTitle": "Makundi Salama ya Jamii",
+  "communityCirclesSubtitle": "Msaada wa kina mama wenzako unaosimamiwa na wataalamu",
+  "circleNewbornTitle": "Akina Mama wa Watoto Wachanga (Miezi 0–3)",
+  "circleNewbornSubtitle": "Akina mama 1.4k • 87 wanashiriki usiku huu",
+  "circleBreastfeedingTitle": "Kimbilio la Unyonyeshaji",
+  "circleBreastfeedingSubtitle": "Linasaidiwa na mtaalamu wa unyonyeshaji",
+  "circleHealingTitle": "Uponyaji Baada ya Kujifungua",
+  "circleHealingSubtitle": "Kupona kwa nyonga, hisia na kupumzika vizuri",
+  "joinCircle": "Jiunge",
+  "joinedCircle": "Umejiunga",
+  "helpfulReadsTitle": "Miongozo na Makala Muhimu",
+  "enterPinTitle": "Karibu tena, {name}",
+  "@enterPinTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "enterPinSubtitle": "Weka PIN yako ya tarakimu 4 kufungua hifadhi yako binafsi",
+  "signInTitle": "Ingia kwenye Niamama",
+  "signInSubtitle": "Weka namba ya simu au jina lako na PIN ya tarakimu 4",
+  "newMotherTitle": "Fungua Wasifu wa Mama",
+  "newMotherSubtitle": "Hifadhi binafsi ya nje ya mtandao kwa ajili yako na mtoto",
+  "phoneOrNameLabel": "Namba ya simu au jina lako",
+  "mamaNameLabel": "Jina Kamili la Mama",
+  "babyNameLabel": "Jina la Mtoto",
+  "babyAgeLabel": "Umri wa Mtoto (wiki)",
+  "babyDobLabel": "Tarehe ya Kuzaliwa ya Mtoto",
+  "setPinLabel": "Weka PIN ya Tarakimu 4",
+  "signInBtn": "Ingia",
+  "newMotherBtn": "Mama Mpya? Fungua Akaunti Yako Binafsi",
+  "haveAccountBtn": "Una akaunti tayari? Ingia",
+  "createAccountBtn": "Fungua Akaunti na Uingie",
+  "switchProfile": "Badilisha Wasifu",
+  "incorrectPin": "PIN ya tarakimu 4 si sahihi. Tafadhali jaribu tena.",
+  "speedDialTitle": "Simu za Haraka za Dharura",
+  "speedDialSubtitle": "Inafanya kazi 100% bila intaneti • Piga Simu au Tuma GPS SOS kwa Mguso Mmoja",
+  "sendSosToAll": "Tuma SOS kwa Namba Zote Kuu",
+  "addEmergencyContact": "Ongeza Mtu wa Dharura",
+  "contactNameLabel": "Jina la Mtu",
+  "phoneNumberLabel": "Namba ya Simu (+254...)",
+  "roleLabel": "Uhusiano / Wajibu (mf. Mwenza, Daktari)",
+  "saveContact": "Hifadhi Mtu",
+  "midwifeSafeChatTitle": "Gumzo Salama na Mkunga",
+  "midwifeSafeChatSubtitle": "Sarah yuko tayari • Imehifadhiwa nje ya mtandao",
+  "selectTopics": "Chagua mada unayotaka kuongelea:",
+  "chatInputHint": "Eleza jambo linalokusumbua kwa sasa...",
+  "connectWithSarah": "Wasiliana na Sarah",
+  "topicFeeding": "Kunyonyesha / Kushika Titi",
+  "topicSleep": "Usingizi / Kuamka",
+  "topicHealing": "Kupona Kimwili",
+  "topicMood": "Hisia na Machozi",
+  "whoPassTitle": "Kadi ya Kidijitali ya Afya ya WHO",
+  "whoPassSubtitle": "Uthibitisho wa Chanjo Nje ya Mtandao",
+  "saveToWallet": "Hifadhi Nje ya Mtandao",
+  "closePreview": "Funga Hakikisho",
+  "calendarReminderTitle": "Kikumbusho cha Kalenda",
+  "addToCalendar": "Weka Kwenye Kalenda ya Simu",
+  "reminderSaved": "Kikumbusho Kimehifadhiwa Nje ya Mtandao",
+  "tapForGps": "Ramani Iko Tayari • Gusa Kupata GPS"
 }

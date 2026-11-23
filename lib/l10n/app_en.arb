@@ -4,6 +4,11 @@
   "navTimeline": "Timeline",
   "navCareMap": "Care Map",
   "navSupport": "Support",
+  "gpsLive": "GPS Live",
+  "offlineReady": "Offline Ready",
+  "sosButton": "SOS",
+  "close": "Close",
+  "cancel": "Cancel",
   "languageLabel": "Language",
   "languageSubtitle": "Choose the app language for this mother's profile",
   "dailyCareTrackers": "Daily Care Trackers",
@@ -42,7 +47,6 @@
   },
   "redFlagTitle": "Red-flag watchlist",
   "redFlagCall": "If you notice any of these, call the maternal helpline 1190 or go to the nearest facility now.",
-  "close": "Close",
   "partnerTaskWater": "Refill a 1L water bottle at the nursing station",
   "partnerTaskSleep": "Protect Mama's 4-hour unbroken sleep block",
   "partnerTaskBurp": "Handle burping & diaper change after each feed",
@@ -95,5 +99,287 @@
         "type": "String"
       }
     }
-  }
+  },
+  "goodMorning": "Good morning, {name}",
+  "@goodMorning": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "goodAfternoon": "Good afternoon, {name}",
+  "@goodAfternoon": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "goodEvening": "Good evening, {name}",
+  "@goodEvening": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "howAreYouFeeling": "How are you feeling right now?",
+  "moodResting": "Resting OK",
+  "moodTired": "A Bit Tired",
+  "moodMidwife": "Ask Midwife",
+  "dailyBreathTitle": "DAILY BREATH",
+  "dailyBreathQuote": "“You are doing enough today. Every feed, cuddle, and quiet breath matters.”",
+  "careHorizon": "Care Horizon",
+  "sixWeeksReviewTitle": "6-Week Postnatal Review",
+  "sixWeeksReviewSubtitle": "WHO Recommended Maternal Checkup",
+  "sixWeeksReviewDesc": "Uterine involution, mood screening, and pelvic healing assessment.",
+  "babyVaccinesHorizonTitle": "Baby {babyName} 6-Week Immunizations",
+  "@babyVaccinesHorizonTitle": {
+    "placeholders": {
+      "babyName": {
+        "type": "String"
+      }
+    }
+  },
+  "babyVaccinesHorizonSubtitle": "Penta 1, PCV 1, OPV 1, Rotavirus 1",
+  "babyVaccinesHorizonDesc": "Gentle protection boosters for tiny lungs, digestion, and resilience.",
+  "lastFeed": "Last Feed",
+  "log": "Log",
+  "essentialCareSupport": "Essential Care & Support",
+  "whenToSeeDoctor": "When to See Doctor",
+  "whenToSeeDoctorDesc": "WHO Red-Flag Triage Guidance",
+  "pediatricCenters": "Pediatric Centers",
+  "pediatricCentersDesc": "Emergency Wings & Child Welfare",
+  "talkWithMidwife": "Talk with a Midwife",
+  "talkWithMidwifeDesc": "Safe, Confidential & Offline",
+  "whoVaccineCard": "WHO Vaccine Card",
+  "whoVaccineCardDesc": "Digital Immunization Pass",
+  "nearestReadyFacility": "NEAREST READY FACILITY",
+  "callMidwifeTriage": "Call Midwife Triage Desk",
+  "viewRouteNav": "View Route & Navigation",
+  "communityWisdom": "Community Wisdom • Tap to Read Guide",
+  "firstSmileMilestone": "First smile milestones: What to notice at 6 to 8 weeks",
+  "quickFeedLoggerTitle": "Quick Feed & Sleep Logger",
+  "quickFeedLoggerSubtitle": "Single-hand nursing tracker • Saved offline",
+  "nursingSide": "Nursing Side",
+  "nursingDuration": "Nursing Duration",
+  "minutesCount": "{count} mins",
+  "@minutesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sleepStretch": "Baby {babyName} Sleep Stretch",
+  "@sleepStretch": {
+    "placeholders": {
+      "babyName": {
+        "type": "String"
+      }
+    }
+  },
+  "hoursMins": "{hours}h {mins}m",
+  "@hoursMins": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "mins": {
+        "type": "int"
+      }
+    }
+  },
+  "saveToOfflineVault": "Save to Offline Vault",
+  "leftSide": "Left Side",
+  "rightSide": "Right Side",
+  "facilityDistDrive": "{dist} km away • Approx. {mins} mins drive",
+  "@facilityDistDrive": {
+    "placeholders": {
+      "dist": {
+        "type": "String"
+      },
+      "mins": {
+        "type": "int"
+      }
+    }
+  },
+  "open247LowWait": "Open 24/7 • Low Wait",
+  "securityVaultTitle": "Private Maternal Vault",
+  "securityVaultDescription": "Your nursing logs, vaccines, calendar reminders, emergency speed-dial contacts, and midwife chats are stored privately in your personal encrypted session.",
+  "requirePinTitle": "Require PIN on Every Access",
+  "requirePinSubtitleOn": "ON: You will be asked for your 4-digit PIN every time you open or resume Niamama.",
+  "requirePinSubtitleOff": "OFF: Your login session stays saved so you open straight to your dashboard.",
+  "securityPinTitle": "4-digit PIN",
+  "securityPinSubtitle": "Used to unlock your maternal vault and sensitive records",
+  "changePin": "Change PIN",
+  "savePin": "Save PIN",
+  "lockVaultNow": "Lock Vault Now",
+  "signOut": "Sign Out",
+  "enterNewPinHint": "Enter new 4-digit numeric PIN",
+  "whoCard": "WHO Card",
+  "childProfileActive": "Child profile active: Baby {babyName} ({weeks} weeks)",
+  "@childProfileActive": {
+    "placeholders": {
+      "babyName": {
+        "type": "String"
+      },
+      "weeks": {
+        "type": "int"
+      }
+    }
+  },
+  "nextStepInDays": "Next Step in {days} Days",
+  "@nextStepInDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "sixWeekImmunizations": "6-Week Immunizations",
+  "sixWeekImmDesc": "Gentle protection boosters for tiny lungs, digestion, and resilience.",
+  "tummyTimeTitle": "Tummy Time & Social Smiles",
+  "tummyTimeSubtitle": "Building neck strength and connection",
+  "tummyTimeWindow": "Week {week} Window",
+  "@tummyTimeWindow": {
+    "placeholders": {
+      "week": {
+        "type": "int"
+      }
+    }
+  },
+  "startTummyTimer": "Start 2-Min Timer",
+  "pauseTimer": "Pause Timer",
+  "captureSmileMemory": "Capture First Smile Memory",
+  "smilesLogged": "{count} Smiles Logged",
+  "@smilesLogged": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cuesToNotice": "Cues {babyName} is trying to engage:",
+  "@cuesToNotice": {
+    "placeholders": {
+      "babyName": {
+        "type": "String"
+      }
+    }
+  },
+  "cueGaze": "Bright, wide-eyed gaze",
+  "cueMouth": "Softening mouth & opening lips",
+  "cueBrows": "Relaxed brows & turning toward voice",
+  "immunizationTimeline": "Immunization Timeline",
+  "globalStandard": "Global Standard",
+  "birthDosesTitle": "Birth Doses (Week 0)",
+  "birthDosesSubtitle": "Given at delivery facility",
+  "week6DosesTitle": "Week 6 Doses",
+  "week6DosesSubtitle": "Primary immunization series",
+  "week10DosesTitle": "Week 10 Boosters",
+  "week10DosesSubtitle": "Second round of protection",
+  "week14DosesTitle": "Week 14 Doses",
+  "week14DosesSubtitle": "Final infant foundation series",
+  "comfortTipsTitle": "Comfort tips for {babyName}",
+  "@comfortTipsTitle": {
+    "placeholders": {
+      "babyName": {
+        "type": "String"
+      }
+    }
+  },
+  "tipBreastfeed": "Breastfeed right after shots for natural pain relief",
+  "tipSkinToSkin": "Hold skin-to-skin upright to regulate heart rate",
+  "tipCoolCloth": "Apply a clean, cool damp cloth if thigh feels warm",
+  "trustedCareNearYou": "Trusted Care Near You",
+  "trustedCareSubtitle": "Verified maternal wings, neonatal care, and gentle walk-in clinics.",
+  "filterAll": "All Facilities",
+  "filterMaternity": "24/7 Maternity",
+  "filterPediatric": "Pediatric Wings",
+  "filterVaccine": "Vaccine Clinics",
+  "filterMidwife": "Midwife Run",
+  "filterPharmacy": "24h Chemists",
+  "allowGps": "Allow GPS",
+  "locatingGps": "Locating GPS...",
+  "emergencyGuidanceTitle": "When to seek immediate emergency care",
+  "emergencyInstinctQuote": "You know your baby best. If you ever feel uneasy, trust your maternal instinct—care teams are here without judgment.",
+  "openEmergencySpeedDialSos": "Open Emergency Speed-Dial & GPS SOS",
+  "lateNightPharmaciesTitle": "Looking for late-night pharmacies?",
+  "lateNightPharmaciesDesc": "We have mapped verified 24-hour chemists stocking infant rehydration, sterile water, and pump supplies.",
+  "viewOpenChemists": "View Open Chemists",
+  "callHelpline": "Call 24/7 National Maternal Helpline (Free)",
+  "supportCircleTitle": "Your Support Circle",
+  "supportCircleSubtitle": "You don't have to navigate postpartum alone. Your midwives, fellow mothers, and care team are right here with you.",
+  "midwifeSarahTitle": "Registered Midwife Sarah",
+  "midwifeOnline": "Online now • Typical reply < 5 mins",
+  "free247": "Free • 24/7",
+  "midwifeSarahQuote": "“Thinking about late-night feeding pain, healing changes, or baby sleep cues? No question is too small or silly. We are here to listen.”",
+  "privateAdvice": "Private, confidential & offline-capable clinical advice",
+  "startSafeChat": "Start Safe Chat",
+  "voiceCall": "Voice Call",
+  "immediateLovedOnes": "Immediate Loved Ones & Care",
+  "speedDialButton": "Speed-Dial",
+  "communityCirclesTitle": "Safe Community Circles",
+  "communityCirclesSubtitle": "Peer support moderated by maternal health champions",
+  "circleNewbornTitle": "Newborn 0–3 Months Mamas",
+  "circleNewbornSubtitle": "1.4k active mothers • 87 sharing tonight",
+  "circleBreastfeedingTitle": "Breastfeeding Sanctuary",
+  "circleBreastfeedingSubtitle": "IBCLC Lactation Specialist moderated",
+  "circleHealingTitle": "Fourth Trimester Healing",
+  "circleHealingSubtitle": "Pelvic recovery, mood, and gentle rest",
+  "joinCircle": "Join",
+  "joinedCircle": "Joined",
+  "helpfulReadsTitle": "Grounded Guidance & Articles",
+  "enterPinTitle": "Welcome back, {name}",
+  "@enterPinTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "enterPinSubtitle": "Enter your 4-digit PIN to open your private maternal vault",
+  "signInTitle": "Sign in to Niamama",
+  "signInSubtitle": "Enter your registered phone number or name and 4-digit PIN",
+  "newMotherTitle": "Create Mother Profile",
+  "newMotherSubtitle": "Private, offline-first vault for you and your baby",
+  "phoneOrNameLabel": "Phone number or your name",
+  "mamaNameLabel": "Mother's Full Name",
+  "babyNameLabel": "Baby's Name",
+  "babyAgeLabel": "Baby's Age (weeks)",
+  "babyDobLabel": "Baby's Date of Birth",
+  "setPinLabel": "Create 4-Digit Numeric PIN",
+  "signInBtn": "Sign In",
+  "newMotherBtn": "New Mother? Create Your Private Account",
+  "haveAccountBtn": "Already registered? Sign In",
+  "createAccountBtn": "Create Account & Sign In",
+  "switchProfile": "Switch Profile",
+  "incorrectPin": "Incorrect 4-digit PIN. Please try again.",
+  "speedDialTitle": "Emergency Speed-Dial",
+  "speedDialSubtitle": "Works 100% Offline • One-Tap Call & GPS SOS",
+  "sendSosToAll": "Send SOS to All Primary Contacts",
+  "addEmergencyContact": "Add Emergency Contact",
+  "contactNameLabel": "Contact Name",
+  "phoneNumberLabel": "Phone Number (+254...)",
+  "roleLabel": "Relationship / Role",
+  "saveContact": "Save Contact",
+  "midwifeSafeChatTitle": "Midwife Safe Chat",
+  "midwifeSafeChatSubtitle": "Sarah is ready • Saved to offline vault",
+  "selectTopics": "Select what you'd like to talk through:",
+  "chatInputHint": "Share what feels heavy right now...",
+  "connectWithSarah": "Connect with Sarah",
+  "topicFeeding": "Feeding / Latch",
+  "topicSleep": "Sleep / Waking",
+  "topicHealing": "Physical Healing",
+  "topicMood": "Mood & Tears",
+  "whoPassTitle": "WHO Digital Health Pass",
+  "whoPassSubtitle": "Offline Immunization Verification",
+  "saveToWallet": "Save to Wallet / Offline Pass",
+  "closePreview": "Close Preview",
+  "calendarReminderTitle": "Calendar Reminder",
+  "addToCalendar": "Add to Device Calendar",
+  "reminderSaved": "Reminder Saved Offline",
+  "tapForGps": "Care Map Active • Tap for Live GPS"
 }

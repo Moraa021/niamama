@@ -1,3 +1,4 @@
+import '../l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../models/niamama_models.dart';
 import '../services/calendar_service.dart';
@@ -89,6 +90,7 @@ class _CalendarReminderSheetState extends State<CalendarReminderSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
     final formatted = _formatDateTime(_selectedDateTime);
 
     return Container(
@@ -125,7 +127,7 @@ class _CalendarReminderSheetState extends State<CalendarReminderSheet> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Calendar & Reminder',
+                        l.calendarReminderTitle,
                         style: NurtureBloomTextStyles.headlineSm,
                       ),
                       Text(

@@ -96,4 +96,22 @@ void main() {
     expect(find.byType(PartnerCopilotSheet), findsOneWidget);
     expect(find.text('Red-flag watchlist'), findsOneWidget);
   });
+
+  testWidgets('switching language to Kiswahili updates dashboard and care map',
+      (tester) async {
+    await pumpApp(tester);
+    expect(find.text('Care Horizon'), findsOneWidget);
+
+    appLocale.value = const Locale('sw');
+    await tester.pump(const Duration(milliseconds: 500));
+
+    expect(find.text('Upeo wa Huduma'), findsOneWidget);
+    expect(find.text('Upeo wa Huduma'), findsOneWidget);
+
+    // Switch to Care Map
+    await tester.tap(find.text('Ramani ya Huduma'));
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(find.text('Huduma za Kuaminika Karibu Nawe'), findsOneWidget);
+    expect(find.text('Vituo Vyote'), findsOneWidget);
+  });
 }

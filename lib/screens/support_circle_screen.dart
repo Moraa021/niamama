@@ -40,6 +40,7 @@ class SupportCircleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 110),
       children: [
@@ -81,14 +82,14 @@ class SupportCircleScreen extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'Your Support Circle',
+                l.supportCircleTitle,
                 style: NurtureBloomTextStyles.headlineLgMobile.copyWith(
                   color: NurtureBloomColors.onSecondaryFixed,
                 ),
               ),
               const SizedBox(height: 4),
               Text(
-                "You don't have to navigate postpartum alone. Your midwives, fellow mothers, and care team are right here with you.",
+                l.supportCircleSubtitle,
                 style: NurtureBloomTextStyles.bodyMd.copyWith(
                   color: NurtureBloomColors.onSecondaryContainer,
                 ),
@@ -161,7 +162,7 @@ class SupportCircleScreen extends StatelessWidget {
                                 children: [
                                   Flexible(
                                     child: Text(
-                                      'Registered Midwife Sarah',
+                                      l.midwifeSarahTitle,
                                       style: NurtureBloomTextStyles.headlineSm,
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -176,7 +177,7 @@ class SupportCircleScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 2),
                               Text(
-                                'Online now • Typical reply < 5 mins',
+                                l.midwifeOnline,
                                 style: NurtureBloomTextStyles.labelSm.copyWith(
                                   color: NurtureBloomColors.primary,
                                 ),
@@ -197,7 +198,7 @@ class SupportCircleScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(999),
                     ),
                     child: Text(
-                      'Free • 24/7',
+                      l.free247,
                       style: NurtureBloomTextStyles.labelSm.copyWith(
                         color: NurtureBloomColors.onPrimaryFixed,
                       ),
@@ -218,7 +219,7 @@ class SupportCircleScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '“Thinking about late-night feeding pain, healing changes, or baby sleep cues? No question is too small or silly. We are here to listen.”',
+                      l.midwifeSarahQuote,
                       style: NurtureBloomTextStyles.bodyMd.copyWith(
                         color: NurtureBloomColors.onSurfaceVariant,
                       ),
@@ -233,7 +234,7 @@ class SupportCircleScreen extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          'Private, confidential & offline-capable clinical advice',
+                          l.privateAdvice,
                           style: NurtureBloomTextStyles.labelSm.copyWith(
                             color: NurtureBloomColors.outline,
                           ),
@@ -259,7 +260,7 @@ class SupportCircleScreen extends StatelessWidget {
                           elevation: 0,
                         ),
                         icon: const Icon(Icons.chat_bubble_rounded, size: 18),
-                        label: const Text('Start Safe Chat'),
+                        label: Text(l.startSafeChat),
                       ),
                     ),
                   ),
@@ -280,7 +281,7 @@ class SupportCircleScreen extends StatelessWidget {
                           shape: const StadiumBorder(),
                         ),
                         icon: const Icon(Icons.phone_in_talk_rounded, size: 18),
-                        label: const Text('Voice Call'),
+                        label: Text(l.voiceCall),
                       ),
                     ),
                   ),
@@ -299,7 +300,7 @@ class SupportCircleScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Immediate Loved Ones & Care',
+                  l.immediateLovedOnes,
                   style: NurtureBloomTextStyles.headlineSm,
                 ),
                 Text(
@@ -316,7 +317,7 @@ class SupportCircleScreen extends StatelessWidget {
                 shape: const StadiumBorder(),
               ),
               icon: const Icon(Icons.person_add_alt_1_rounded, size: 16),
-              label: const Text('Speed-Dial'),
+              label: Text(l.speedDialButton),
             ),
           ],
         ),
@@ -415,11 +416,11 @@ class SupportCircleScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Maternal Village Circles',
+                  l.communityCirclesTitle,
                   style: NurtureBloomTextStyles.headlineSm,
                 ),
                 Text(
-                  'Safe, moderated spaces to share raw solidarity',
+                  l.communityCirclesSubtitle,
                   style: NurtureBloomTextStyles.bodySm,
                 ),
               ],
@@ -435,32 +436,35 @@ class SupportCircleScreen extends StatelessWidget {
         const SizedBox(height: 12),
 
         _buildCircleCard(
+          context: context,
           id: 'newborn',
           icon: Icons.child_friendly_rounded,
           iconBg: NurtureBloomColors.primaryFixed,
           iconColor: NurtureBloomColors.onPrimaryFixed,
-          title: 'Newborn 0–3 Months Mamas',
-          subtitle: '1.4k active mothers • 87 sharing tonight',
+          title: l.circleNewbornTitle,
+          subtitle: l.circleNewbornSubtitle,
           footer: '“How are you surviving the 3 AM cluster feed?”',
         ),
         const SizedBox(height: 10),
         _buildCircleCard(
+          context: context,
           id: 'breastfeeding',
           icon: Icons.water_drop_rounded,
           iconBg: NurtureBloomColors.secondaryContainer,
           iconColor: NurtureBloomColors.onSecondaryContainer,
-          title: 'Breastfeeding Sanctuary',
-          subtitle: 'IBCLC Lactation Specialist moderated',
+          title: l.circleBreastfeedingTitle,
+          subtitle: l.circleBreastfeedingSubtitle,
           footer: 'Gentle latch positioning & let-down comfort',
         ),
         const SizedBox(height: 10),
         _buildCircleCard(
+          context: context,
           id: 'healing',
           icon: Icons.volunteer_activism_rounded,
           iconBg: NurtureBloomColors.tertiaryFixed,
           iconColor: NurtureBloomColors.onTertiaryFixed,
-          title: 'Fourth Trimester Healing',
-          subtitle: 'Pelvic recovery, mood, and gentle rest',
+          title: l.circleHealingTitle,
+          subtitle: l.circleHealingSubtitle,
           footer: '“Zero shame night-waking confessions & hugs”',
         ),
         const SizedBox(height: 20),
@@ -544,6 +548,7 @@ class SupportCircleScreen extends StatelessWidget {
   }
 
   Widget _buildCircleCard({
+    required BuildContext context,
     required String id,
     required IconData icon,
     required Color iconBg,
@@ -552,6 +557,7 @@ class SupportCircleScreen extends StatelessWidget {
     required String subtitle,
     required String footer,
   }) {
+    final l = AppLocalizations.of(context)!;
     final isJoined = state.joinedCircles[id] == true;
     return Container(
       padding: const EdgeInsets.all(16),
@@ -606,7 +612,7 @@ class SupportCircleScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(999),
                   ),
                   child: Text(
-                    isJoined ? 'Joined' : '+ Join',
+                    isJoined ? l.joinedCircle : '+ ${l.joinCircle}',
                     style: NurtureBloomTextStyles.labelSm.copyWith(
                       color: isJoined
                           ? NurtureBloomColors.onPrimaryFixed

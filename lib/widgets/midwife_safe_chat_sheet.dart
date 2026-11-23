@@ -1,3 +1,4 @@
+import '../l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../models/niamama_models.dart';
 import '../theme/nurture_bloom_theme.dart';
@@ -42,6 +43,7 @@ class _MidwifeSafeChatSheetState extends State<MidwifeSafeChatSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
     return Container(
       decoration: const BoxDecoration(
         color: NurtureBloomColors.surfaceContainerLowest,
@@ -81,11 +83,11 @@ class _MidwifeSafeChatSheetState extends State<MidwifeSafeChatSheet> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Midwife Safe Chat',
+                          l.midwifeSafeChatTitle,
                           style: NurtureBloomTextStyles.headlineSm,
                         ),
                         Text(
-                          'Sarah is ready • Saved to offline vault',
+                          l.midwifeSafeChatSubtitle,
                           style: NurtureBloomTextStyles.labelSm.copyWith(
                             color: NurtureBloomColors.primary,
                           ),
@@ -210,7 +212,7 @@ class _MidwifeSafeChatSheetState extends State<MidwifeSafeChatSheet> {
               controller: _textController,
               maxLines: 3,
               decoration: InputDecoration(
-                hintText: 'Share what feels heavy right now...',
+                hintText: l.chatInputHint,
                 filled: true,
                 fillColor: NurtureBloomColors.surface,
                 border: OutlineInputBorder(
@@ -234,7 +236,7 @@ class _MidwifeSafeChatSheetState extends State<MidwifeSafeChatSheet> {
                 ),
                 icon: const Icon(Icons.send_rounded, size: 18),
                 label: Text(
-                  'Connect with Sarah',
+                  l.connectWithSarah,
                   style: NurtureBloomTextStyles.labelLg.copyWith(
                     color: NurtureBloomColors.onPrimary,
                   ),

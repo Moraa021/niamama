@@ -1,3 +1,4 @@
+import '../l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../models/niamama_models.dart';
 import '../services/location_service.dart';
@@ -47,8 +48,18 @@ class _CareMapScreenState extends State<CareMapScreen> {
     super.dispose();
   }
 
+  String _filterLabel(String id, AppLocalizations l) => switch (id) {
+        'maternity' => l.filterMaternity,
+        'pediatric' => l.filterPediatric,
+        'vaccines' => l.filterVaccine,
+        'midwife' => l.filterMidwife,
+        'pharmacy' => l.filterPharmacy,
+        _ => l.filterAll,
+      };
+
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
     final enriched = LocationService.facilities.map((facility) {
       final distKm = LocationService.calculateDistanceKm(
         widget.userCoords.lat,
@@ -110,10 +121,10 @@ class _CareMapScreenState extends State<CareMapScreen> {
                     const SizedBox(width: 6),
                     Text(
                       widget.gpsStatus == GpsPermissionStatus.requesting
-                          ? 'Locating GPS...'
+                          ? l.locatingGps
                           : widget.userCoords.isLiveGps
                               ? 'Care Map Active • GPS ±${widget.userCoords.accuracy.round()}m'
-                              : 'Care Map Active • Tap for Live GPS',
+                              : l.tapForGps,
                       style: NurtureBloomTextStyles.labelSm.copyWith(
                         color: NurtureBloomColors.onPrimaryFixed,
                       ),
@@ -143,12 +154,12 @@ class _CareMapScreenState extends State<CareMapScreen> {
         ),
         const SizedBox(height: 8),
         Text(
-          'Trusted Care Near You',
+          l.trustedCareNearYou,
           style: NurtureBloomTextStyles.headlineLgMobile,
         ),
         const SizedBox(height: 2),
         Text(
-          'Verified maternal wings, neonatal care, and gentle walk-in clinics.',
+          l.trustedCareSubtitle,
           style: NurtureBloomTextStyles.bodySm,
         ),
         const SizedBox(height: 12),
@@ -204,7 +215,7 @@ class _CareMapScreenState extends State<CareMapScreen> {
                     shape: const StadiumBorder(),
                     elevation: 0,
                   ),
-                  child: const Text('Allow GPS'),
+                  child: Text(l.allowGps),
                 ),
               ],
             ),
@@ -277,7 +288,7 @@ class _CareMapScreenState extends State<CareMapScreen> {
                     borderRadius: BorderRadius.circular(999),
                   ),
                   child: Text(
-                    f['label']!,
+                    _filterLabel(f['id']!, l),
                     style: NurtureBloomTextStyles.labelSm.copyWith(
                       color: isSelected
                           ? NurtureBloomColors.onPrimary
@@ -767,7 +778,7 @@ class _CareMapScreenState extends State<CareMapScreen> {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          'You know your baby best. If you ever feel uneasy, trust your maternal instinct—care teams are here without judgment.',
+                          l.emergencyInstinctQuote,
                           style: NurtureBloomTextStyles.bodySm,
                         ),
                       ],
@@ -794,7 +805,7 @@ class _CareMapScreenState extends State<CareMapScreen> {
                         color: NurtureBloomColors.tertiary,
                       ),
                       title: Text(
-                        'When to seek immediate emergency care',
+                        l.emergencyGuidanceTitle,
                         style: NurtureBloomTextStyles.labelLg,
                       ),
                       trailing: Icon(
@@ -854,7 +865,7 @@ class _CareMapScreenState extends State<CareMapScreen> {
                   ),
                   icon: const Icon(Icons.phone_in_talk_rounded, size: 22),
                   label: Text(
-                    'Call 24/7 National Maternal Helpline (Free)',
+                    l.callHelpline,
                     style: NurtureBloomTextStyles.labelLg.copyWith(
                       color: NurtureBloomColors.onTertiary,
                     ),
@@ -873,7 +884,7 @@ class _CareMapScreenState extends State<CareMapScreen> {
                     shape: const StadiumBorder(),
                   ),
                   icon: const Icon(Icons.emergency_share_rounded, size: 18),
-                  label: const Text('Open Emergency Speed-Dial & GPS SOS'),
+                  label: Text(l.openEmergencySpeedDialSos),
                 ),
               ),
             ],
@@ -906,12 +917,12 @@ class _CareMapScreenState extends State<CareMapScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                'Looking for late-night pharmacies?',
+                l.lateNightPharmaciesTitle,
                 style: NurtureBloomTextStyles.labelLg,
               ),
               const SizedBox(height: 4),
               Text(
-                'We have mapped verified 24-hour chemists stocking infant rehydration, sterile water, and pump supplies.',
+                l.lateNightPharmaciesDesc,
                 style: NurtureBloomTextStyles.bodySm,
                 textAlign: TextAlign.center,
               ),
@@ -932,7 +943,7 @@ class _CareMapScreenState extends State<CareMapScreen> {
                     vertical: 10,
                   ),
                 ),
-                child: const Text('View Open Chemists'),
+                child: Text(l.viewOpenChemists),
               ),
             ],
           ),

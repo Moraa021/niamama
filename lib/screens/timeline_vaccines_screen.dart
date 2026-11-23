@@ -1,3 +1,4 @@
+import '../l10n/app_localizations.dart';
 import '../widgets/safe_avatar.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -84,6 +85,7 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
     final is6wScheduled =
         widget.state.savedCalendarReminders.containsKey('vaccine-6w');
     final is10wScheduled =
@@ -153,12 +155,13 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                     shape: const StadiumBorder(),
                   ),
                   icon: const Icon(Icons.badge_rounded, size: 18),
-                  label: const Text('WHO Card'),
+                  label: Text(l.whoCard),
                 ),
                 const SizedBox(width: 6),
                 IconButton(
                   onPressed: () => widget.onShowToast(
-                    'Child profile active: Baby ${widget.tenant.babyName} (${widget.tenant.babyAgeWeeks} weeks)',
+                    l.childProfileActive(
+                        widget.tenant.babyName, widget.tenant.babyAgeWeeks),
                   ),
                   style: IconButton.styleFrom(
                     backgroundColor: NurtureBloomColors.surfaceContainerLow,
@@ -207,7 +210,7 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                       borderRadius: BorderRadius.circular(999),
                     ),
                     child: Text(
-                      'Next Step in 4 Days',
+                      l.nextStepInDays(4),
                       style: NurtureBloomTextStyles.labelSm.copyWith(
                         color: NurtureBloomColors.primary,
                       ),
@@ -225,12 +228,12 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '6-Week Immunizations',
+                          l.sixWeekImmunizations,
                           style: NurtureBloomTextStyles.headlineMd,
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'Gentle protection boosters for tiny lungs, digestion, and resilience.',
+                          l.sixWeekImmDesc,
                           style: NurtureBloomTextStyles.bodySm,
                         ),
                       ],
@@ -335,7 +338,8 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                 ),
               ],
             ),
-            Text('Week 6 Window', style: NurtureBloomTextStyles.labelSm),
+            Text(l.tummyTimeWindow(widget.tenant.babyAgeWeeks),
+                style: NurtureBloomTextStyles.labelSm),
           ],
         ),
         const SizedBox(height: 10),
@@ -432,7 +436,7 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Cues ${widget.tenant.babyName} is trying to engage:',
+                      l.cuesToNotice(widget.tenant.babyName),
                       style: NurtureBloomTextStyles.labelSm,
                     ),
                     const SizedBox(height: 8),
@@ -554,7 +558,7 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  'WHO Vaccine Schedule',
+                  l.immunizationTimeline,
                   style: NurtureBloomTextStyles.headlineSm,
                 ),
               ],
@@ -562,7 +566,7 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
             TextButton.icon(
               onPressed: widget.onOpenWhoPass,
               icon: const Icon(Icons.info_outline_rounded, size: 16),
-              label: const Text('Global Standard'),
+              label: Text(l.globalStandard),
             ),
           ],
         ),
@@ -717,7 +721,7 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                         ),
                         const SizedBox(width: 6),
                         Text(
-                          'Comfort tips for ${widget.tenant.babyName}',
+                          l.comfortTipsTitle(widget.tenant.babyName),
                           style: NurtureBloomTextStyles.labelMd.copyWith(
                             color: NurtureBloomColors.secondary,
                           ),

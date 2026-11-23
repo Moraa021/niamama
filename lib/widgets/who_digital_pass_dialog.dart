@@ -1,3 +1,4 @@
+import '../l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../models/niamama_models.dart';
 import '../theme/nurture_bloom_theme.dart';
@@ -16,6 +17,7 @@ class WhoDigitalPassDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
     final verifiedBadges = <String>[
       '✓ BCG Verified',
       '✓ OPV0 Verified',
@@ -45,7 +47,7 @@ class WhoDigitalPassDialog extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      'WHO Digital Pass',
+                      l.whoPassTitle,
                       style: NurtureBloomTextStyles.headlineSm,
                     ),
                   ],
@@ -149,7 +151,7 @@ class WhoDigitalPassDialog extends StatelessWidget {
                   elevation: 0,
                 ),
                 icon: const Icon(Icons.download_rounded, size: 18),
-                label: const Text('Save to Wallet / Offline Pass'),
+                label: Text(l.saveToWallet),
               ),
             ),
             const SizedBox(height: 8),
@@ -163,7 +165,7 @@ class WhoDigitalPassDialog extends StatelessWidget {
                   foregroundColor: NurtureBloomColors.onSurface,
                   shape: const StadiumBorder(),
                 ),
-                child: const Text('Close Preview'),
+                child: Text(l.closePreview),
               ),
             ),
           ],

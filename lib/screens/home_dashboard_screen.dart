@@ -66,6 +66,7 @@ class HomeDashboardScreen extends StatelessWidget {
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
       builder: (ctx) {
+        final l = AppLocalizations.of(context)!;
         return StatefulBuilder(
           builder: (ctx, setModalState) {
             return Container(
@@ -100,11 +101,11 @@ class HomeDashboardScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Quick Feed & Sleep Logger',
+                                l.quickFeedLoggerTitle,
                                 style: NurtureBloomTextStyles.headlineSm,
                               ),
                               Text(
-                                'Single-hand nursing tracker • Saved offline',
+                                l.quickFeedLoggerSubtitle,
                                 style: NurtureBloomTextStyles.labelSm,
                               ),
                             ],
@@ -198,11 +199,11 @@ class HomeDashboardScreen extends StatelessWidget {
                         Column(
                           children: [
                             Text(
-                              '$durationMins mins',
+                              l.minutesCount(durationMins),
                               style: NurtureBloomTextStyles.headlineMd,
                             ),
                             Text(
-                              'Nursing Duration',
+                              l.nursingDuration,
                               style: NurtureBloomTextStyles.labelSm,
                             ),
                           ],
@@ -249,7 +250,7 @@ class HomeDashboardScreen extends StatelessWidget {
                               style: NurtureBloomTextStyles.headlineMd,
                             ),
                             Text(
-                              'Baby ${activeTenant.babyName} Sleep Stretch',
+                              l.sleepStretch(activeTenant.babyName),
                               style: NurtureBloomTextStyles.labelSm,
                             ),
                           ],
@@ -289,7 +290,7 @@ class HomeDashboardScreen extends StatelessWidget {
                         shape: const StadiumBorder(),
                       ),
                       icon: const Icon(Icons.check_rounded),
-                      label: const Text('Save to Offline Vault'),
+                      label: Text(l.saveToOfflineVault),
                     ),
                   ),
                 ],
@@ -303,6 +304,7 @@ class HomeDashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
     final latestFeed = state.feedLogs.isNotEmpty ? state.feedLogs.first : null;
     final lastFeedAgo = latestFeed != null
         ? OfflineVaultService.formatRelativeTime(latestFeed.timestamp)
@@ -339,9 +341,11 @@ class HomeDashboardScreen extends StatelessWidget {
     ];
     final formattedDateHeader =
         '${weekdays[now.weekday - 1]}, ${now.day} ${months[now.month - 1]}';
-    final greetingPrefix = now.hour < 12
-        ? 'Good morning'
-        : (now.hour < 17 ? 'Good afternoon' : 'Good evening');
+    final greetingText = now.hour < 12
+        ? l.goodMorning(activeTenant.mamaFirstName)
+        : (now.hour < 17
+            ? l.goodAfternoon(activeTenant.mamaFirstName)
+            : l.goodEvening(activeTenant.mamaFirstName));
 
     final primaryHospital = LocationService.facilities.first;
     final hospitalDistKm = userCoords.isLiveGps
@@ -380,7 +384,7 @@ class HomeDashboardScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '$greetingPrefix, ${activeTenant.mamaFirstName}',
+                    greetingText,
                     style: NurtureBloomTextStyles.headlineLgMobile,
                   ),
                 ],
@@ -508,14 +512,14 @@ class HomeDashboardScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'DAILY BREATH',
+                      l.dailyBreathTitle,
                       style: NurtureBloomTextStyles.labelSm.copyWith(
                         color: NurtureBloomColors.onSecondaryContainer,
                       ),
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      '“You are doing enough today. Every feed, cuddle, and quiet breath matters.”',
+                      l.dailyBreathQuote,
                       style: NurtureBloomTextStyles.bodyMd.copyWith(
                         fontStyle: FontStyle.italic,
                       ),
@@ -550,7 +554,7 @@ class HomeDashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 6),
                       Text(
-                        'How are you feeling right now?',
+                        l.howAreYouFeeling,
                         style: NurtureBloomTextStyles.labelMd,
                       ),
                     ],
@@ -568,19 +572,19 @@ class HomeDashboardScreen extends StatelessWidget {
                 children: [
                   _buildMoodButton(
                     emoji: '🌿',
-                    label: 'Resting OK',
+                    label: l.moodResting,
                     id: 'resting',
                   ),
                   const SizedBox(width: 8),
                   _buildMoodButton(
                     emoji: '✨',
-                    label: 'A Bit Tired',
+                    label: l.moodTired,
                     id: 'tired',
                   ),
                   const SizedBox(width: 8),
                   _buildMoodButton(
                     emoji: '💬',
-                    label: 'Ask Midwife',
+                    label: l.moodMidwife,
                     id: 'midwife',
                   ),
                 ],
@@ -594,7 +598,7 @@ class HomeDashboardScreen extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Care Horizon', style: NurtureBloomTextStyles.headlineSm),
+            Text(l.careHorizon, style: NurtureBloomTextStyles.headlineSm),
             Row(
               children: [
                 Text(
@@ -666,7 +670,7 @@ class HomeDashboardScreen extends StatelessWidget {
                       CalendarReminderTarget(
                         id: 'vaccine-6w',
                         title:
-                            'Baby ${activeTenant.babyName} 6-Week Immunizations (Penta 1, PCV 1, OPV 1, Rotavirus 1)',
+                            l.babyVaccinesHorizonTitle(activeTenant.babyName),
                         subtitle: 'WHO Primary Protection Series',
                         location:
                             'Midtown Child Welfare Clinic • Room 3B with Dr. Aris',
@@ -790,7 +794,7 @@ class HomeDashboardScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            '6-Week Postnatal Review',
+                            l.sixWeeksReviewTitle,
                             style: NurtureBloomTextStyles.headlineSm,
                           ),
                         ],
@@ -935,7 +939,7 @@ class HomeDashboardScreen extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                'Last Feed',
+                                l.lastFeed,
                                 style: NurtureBloomTextStyles.labelMd,
                               ),
                               const SizedBox(width: 8),
@@ -969,7 +973,7 @@ class HomeDashboardScreen extends StatelessWidget {
                   shape: const StadiumBorder(),
                 ),
                 icon: const Icon(Icons.add_rounded, size: 18),
-                label: const Text('Log'),
+                label: Text(l.log),
               ),
             ],
           ),
@@ -993,7 +997,7 @@ class HomeDashboardScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Essential Care & Support',
+              l.essentialCareSupport,
               style: NurtureBloomTextStyles.headlineSm,
             ),
             InkWell(
@@ -1043,9 +1047,8 @@ class HomeDashboardScreen extends StatelessWidget {
                   iconBg: NurtureBloomColors.primaryFixed,
                   iconColor: NurtureBloomColors.primary,
                   badgeText: '6 Red Flags',
-                  title: 'When to See Doctor',
-                  subtitle:
-                      'Neo4j clinical red-flag triage for infant fever, breathing & postpartum recovery',
+                  title: l.whenToSeeDoctor,
+                  subtitle: l.whenToSeeDoctorDesc,
                   actionLabel: 'Open Triage Guide',
                   onTap: onOpenClinicalTriage,
                 ),
@@ -1057,9 +1060,8 @@ class HomeDashboardScreen extends StatelessWidget {
                   iconBg: NurtureBloomColors.secondaryFixed,
                   iconColor: NurtureBloomColors.secondary,
                   badgeText: '4 Nearby',
-                  title: 'Pediatric Centers',
-                  subtitle:
-                      'Level 4/5 NICU, maternity wings, 24/7 chemists & cold-chain clinics',
+                  title: l.pediatricCenters,
+                  subtitle: l.pediatricCentersDesc,
                   actionLabel: 'Explore Care Map',
                   onTap: () => onNavigateTab(2),
                 ),
@@ -1078,9 +1080,8 @@ class HomeDashboardScreen extends StatelessWidget {
                   iconBg: NurtureBloomColors.primaryFixedDim,
                   iconColor: NurtureBloomColors.onPrimaryFixedVariant,
                   badgeText: 'Neo4j AI + RN',
-                  title: 'Talk with a Midwife',
-                  subtitle:
-                      '24/7 safe chat with Midwife Sarah grounded in WHO postnatal protocols',
+                  title: l.talkWithMidwife,
+                  subtitle: l.talkWithMidwifeDesc,
                   actionLabel: 'Start Safe Chat',
                   onTap: onOpenSafeChat,
                 ),
@@ -1093,9 +1094,8 @@ class HomeDashboardScreen extends StatelessWidget {
                   iconColor: NurtureBloomColors.onTertiaryFixedVariant,
                   badgeText:
                       '${state.completedVaccines.values.where((v) => v).length}/6 Verified',
-                  title: 'WHO Vaccine Card',
-                  subtitle:
-                      'Official digital QR pass & dose tracker for Baby ${activeTenant.babyName}',
+                  title: l.whoVaccineCard,
+                  subtitle: l.whoVaccineCardDesc,
                   actionLabel: 'Open Digital Pass',
                   onTap: onOpenWhoPass,
                 ),
@@ -1128,7 +1128,7 @@ class HomeDashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 6),
                       Text(
-                        'NEAREST READY FACILITY',
+                        l.nearestReadyFacility,
                         style: NurtureBloomTextStyles.labelSm.copyWith(
                           color: NurtureBloomColors.primary,
                         ),
@@ -1145,7 +1145,7 @@ class HomeDashboardScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(999),
                     ),
                     child: Text(
-                      'Open 24/7 • Low Wait',
+                      l.open247LowWait,
                       style: NurtureBloomTextStyles.labelSm.copyWith(
                         color: NurtureBloomColors.onPrimaryFixed,
                       ),
@@ -1175,7 +1175,9 @@ class HomeDashboardScreen extends StatelessWidget {
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              '$hospitalDistKm km away • Approx. $hospitalDriveMins mins drive',
+                              l.facilityDistDrive(
+                                  hospitalDistKm.toStringAsFixed(1),
+                                  hospitalDriveMins),
                               style: NurtureBloomTextStyles.bodySm,
                             ),
                           ],
@@ -1231,7 +1233,7 @@ class HomeDashboardScreen extends StatelessWidget {
                   ),
                   icon: const Icon(Icons.call_rounded, size: 20),
                   label: Text(
-                    'Call Midwife Triage Desk',
+                    l.callMidwifeTriage,
                     style: NurtureBloomTextStyles.labelLg.copyWith(
                       color: NurtureBloomColors.onPrimary,
                     ),
@@ -1255,7 +1257,7 @@ class HomeDashboardScreen extends StatelessWidget {
                     color: NurtureBloomColors.secondary,
                   ),
                   label: Text(
-                    'View Route & Navigation',
+                    l.viewRouteNav,
                     style: NurtureBloomTextStyles.labelMd,
                   ),
                 ),
@@ -1327,7 +1329,7 @@ class HomeDashboardScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(999),
                         ),
                         child: Text(
-                          'Community Wisdom • Tap to Read Guide',
+                          l.communityWisdom,
                           style: NurtureBloomTextStyles.labelSm.copyWith(
                             color: NurtureBloomColors.onSurface,
                           ),
@@ -1335,7 +1337,7 @@ class HomeDashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'First smile milestones: What to notice at 6 to 8 weeks',
+                        l.firstSmileMilestone,
                         style: NurtureBloomTextStyles.labelLg.copyWith(
                           color: Colors.white,
                         ),

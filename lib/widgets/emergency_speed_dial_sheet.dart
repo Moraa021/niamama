@@ -1,3 +1,4 @@
+import '../l10n/app_localizations.dart';
 import '../widgets/safe_avatar.dart';
 import 'package:flutter/material.dart';
 import '../models/niamama_models.dart';
@@ -74,6 +75,7 @@ class _EmergencySpeedDialSheetState extends State<EmergencySpeedDialSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
     final primaryPartner =
         widget.contacts.isNotEmpty ? widget.contacts.first : null;
 
@@ -117,11 +119,11 @@ class _EmergencySpeedDialSheetState extends State<EmergencySpeedDialSheet> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Emergency Speed-Dial',
+                          l.speedDialTitle,
                           style: NurtureBloomTextStyles.headlineSm,
                         ),
                         Text(
-                          'Works 100% Offline • One-Tap Call & GPS SOS',
+                          l.speedDialSubtitle,
                           style: NurtureBloomTextStyles.labelSm.copyWith(
                             color: NurtureBloomColors.secondary,
                           ),
@@ -470,7 +472,7 @@ class _EmergencySpeedDialSheetState extends State<EmergencySpeedDialSheet> {
                   onPressed: () => setState(() => _showAddForm = !_showAddForm),
                   icon: const Icon(Icons.person_add_alt_1_rounded, size: 16),
                   label: Text(
-                    _showAddForm ? 'Close' : 'Add Contact',
+                    _showAddForm ? l.close : l.addEmergencyContact,
                     style: NurtureBloomTextStyles.labelSm.copyWith(
                       color: NurtureBloomColors.primary,
                     ),
@@ -492,14 +494,14 @@ class _EmergencySpeedDialSheetState extends State<EmergencySpeedDialSheet> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Add Offline Speed-Dial Contact',
+                      l.addEmergencyContact,
                       style: NurtureBloomTextStyles.labelMd,
                     ),
                     const SizedBox(height: 8),
                     TextField(
                       controller: _nameController,
                       decoration: InputDecoration(
-                        hintText: 'Name (e.g., Sister Mary or Clinic)',
+                        hintText: l.contactNameLabel,
                         filled: true,
                         fillColor: NurtureBloomColors.surfaceContainerLowest,
                         contentPadding: const EdgeInsets.symmetric(
@@ -540,7 +542,7 @@ class _EmergencySpeedDialSheetState extends State<EmergencySpeedDialSheet> {
                           child: TextField(
                             controller: _roleController,
                             decoration: InputDecoration(
-                              hintText: 'Role (e.g., Family)',
+                              hintText: l.roleLabel,
                               filled: true,
                               fillColor:
                                   NurtureBloomColors.surfaceContainerLowest,
@@ -568,7 +570,7 @@ class _EmergencySpeedDialSheetState extends State<EmergencySpeedDialSheet> {
                           foregroundColor: NurtureBloomColors.onPrimary,
                           shape: const StadiumBorder(),
                         ),
-                        child: const Text('Save to Speed-Dial'),
+                        child: Text(l.saveContact),
                       ),
                     ),
                   ],
