@@ -6,6 +6,8 @@ import '../theme/nurture_bloom_theme.dart';
 class SupportCircleScreen extends StatelessWidget {
   final NiamamaState state;
   final UserCoordinates userCoords;
+  final String mamaName;
+  final String babyName;
   final void Function(String circleId) onToggleCircle;
   final VoidCallback onOpenSafeChat;
   final VoidCallback onOpenSpeedDial;
@@ -16,6 +18,8 @@ class SupportCircleScreen extends StatelessWidget {
     super.key,
     required this.state,
     required this.userCoords,
+    required this.mamaName,
+    required this.babyName,
     required this.onToggleCircle,
     required this.onOpenSafeChat,
     required this.onOpenSpeedDial,
@@ -369,6 +373,8 @@ class SupportCircleScreen extends StatelessWidget {
                           phoneNumber: contact.phone,
                           coords: userCoords,
                           isUrgentSos: false,
+                          mamaName: mamaName,
+                          babyName: babyName,
                         );
                         onShowToast(
                           'Prepared SMS with live GPS location for ${contact.name}',

@@ -312,7 +312,8 @@ class _CareMapScreenState extends State<CareMapScreen> {
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                       colors: [
-                        NurtureBloomColors.inverseSurface.withValues(alpha: 0.55),
+                        NurtureBloomColors.inverseSurface
+                            .withValues(alpha: 0.55),
                         Colors.transparent,
                       ],
                     ),
@@ -357,8 +358,7 @@ class _CareMapScreenState extends State<CareMapScreen> {
                   child: _buildMapPin(
                     icon: Icons.local_hospital_rounded,
                     iconColor: NurtureBloomColors.primary,
-                    label:
-                        '${enriched[0].distKm} km • ${enriched[0].mins}m',
+                    label: '${enriched[0].distKm} km • ${enriched[0].mins}m',
                   ),
                 ),
                 Positioned(
@@ -367,8 +367,7 @@ class _CareMapScreenState extends State<CareMapScreen> {
                   child: _buildMapPin(
                     icon: Icons.emergency_rounded,
                     iconColor: NurtureBloomColors.tertiary,
-                    label:
-                        '${enriched[1].distKm} km • ${enriched[1].mins}m',
+                    label: '${enriched[1].distKm} km • ${enriched[1].mins}m',
                   ),
                 ),
                 Positioned(
@@ -627,7 +626,8 @@ class _CareMapScreenState extends State<CareMapScreen> {
                     child: ElevatedButton.icon(
                       onPressed: () {
                         LocationService.dialNumber(f.phone);
-                        widget.onShowToast('Calling ${f.name} Triage Hotline...');
+                        widget
+                            .onShowToast('Calling ${f.name} Triage Hotline...');
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: NurtureBloomColors.primary,

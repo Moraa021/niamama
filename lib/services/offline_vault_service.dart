@@ -6,7 +6,8 @@ class OfflineVaultService {
   static const String _legacyStorageKey = 'niamama_flutter_offline_vault_v1';
   static const String _tenantVaultPrefix = 'niamama_tenant_vault_v2_';
   static const String _tenantsRegistryKey = 'niamama_tenants_registry_v1';
-  static const String _activeTenantIdKey = 'niamama_active_session_tenant_id_v1';
+  static const String _activeTenantIdKey =
+      'niamama_active_session_tenant_id_v1';
 
   static String _vaultKeyForTenant(String tenantId) =>
       '$_tenantVaultPrefix$tenantId';
@@ -92,8 +93,7 @@ class OfflineVaultService {
         return initial;
       }
 
-      final Map<String, dynamic> data =
-          jsonDecode(raw) as Map<String, dynamic>;
+      final Map<String, dynamic> data = jsonDecode(raw) as Map<String, dynamic>;
 
       final feedLogsRaw = data['feedLogs'] as List<dynamic>?;
       final contactsRaw = data['contacts'] as List<dynamic>?;
@@ -110,12 +110,10 @@ class OfflineVaultService {
         tummyTimeMinutesToday:
             (data['tummyTimeMinutesToday'] as num?)?.toInt() ??
                 initial.tummyTimeMinutesToday,
-        tummyTimeGoalMinutes:
-            (data['tummyTimeGoalMinutes'] as num?)?.toInt() ??
-                initial.tummyTimeGoalMinutes,
-        smileMemoriesCount:
-            (data['smileMemoriesCount'] as num?)?.toInt() ??
-                initial.smileMemoriesCount,
+        tummyTimeGoalMinutes: (data['tummyTimeGoalMinutes'] as num?)?.toInt() ??
+            initial.tummyTimeGoalMinutes,
+        smileMemoriesCount: (data['smileMemoriesCount'] as num?)?.toInt() ??
+            initial.smileMemoriesCount,
         engagementCues: _decodeBoolMap(
           data['engagementCues'],
           initial.engagementCues,

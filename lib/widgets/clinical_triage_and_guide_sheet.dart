@@ -446,7 +446,8 @@ class _Neo4jCareGuideReaderSheetState extends State<Neo4jCareGuideReaderSheet> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(sec.heading, style: NurtureBloomTextStyles.labelLg),
+                        Text(sec.heading,
+                            style: NurtureBloomTextStyles.labelLg),
                         const SizedBox(height: 6),
                         Text(sec.body, style: NurtureBloomTextStyles.bodySm),
                       ],

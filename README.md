@@ -31,7 +31,7 @@
 ```bash
 docker compose up -d
 ```
-Neo4j Browser is available at `http://localhost:7474` (credentials: `neo4j` / `niamama_graph_2026`). If Neo4j is not running or the device is offline, Niamama automatically uses its embedded offline clinical graph mirror.
+Neo4j Browser is available at `http://localhost:7474` (credentials: `neo4j` / `niamama_graph_2026`). Override the connection with `--dart-define=NEO4J_URI=...`, `--dart-define=NEO4J_USER=...`, `--dart-define=NEO4J_PASSWORD=...` (e.g. to reach Neo4j over LAN from a physical device). If Neo4j is not running or the device is offline, Niamama automatically uses its embedded offline clinical graph mirror.
 
 ### 2. Run the Flutter App
 ```bash

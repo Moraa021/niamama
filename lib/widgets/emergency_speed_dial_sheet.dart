@@ -6,6 +6,8 @@ import '../theme/nurture_bloom_theme.dart';
 class EmergencySpeedDialSheet extends StatefulWidget {
   final List<EmergencyContact> contacts;
   final UserCoordinates userCoords;
+  final String mamaName;
+  final String babyName;
   final GpsPermissionStatus gpsStatus;
   final VoidCallback onRequestLocation;
   final void Function(EmergencyContact newContact) onAddContact;
@@ -16,6 +18,8 @@ class EmergencySpeedDialSheet extends StatefulWidget {
     super.key,
     required this.contacts,
     required this.userCoords,
+    required this.mamaName,
+    required this.babyName,
     required this.gpsStatus,
     required this.onRequestLocation,
     required this.onAddContact,
@@ -144,7 +148,8 @@ class _EmergencySpeedDialSheetState extends State<EmergencySpeedDialSheet> {
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: NurtureBloomColors.secondaryFixed.withValues(alpha: 0.55),
+                color:
+                    NurtureBloomColors.secondaryFixed.withValues(alpha: 0.55),
                 borderRadius: BorderRadius.circular(18),
               ),
               child: Column(
@@ -214,6 +219,8 @@ class _EmergencySpeedDialSheetState extends State<EmergencySpeedDialSheet> {
                             phoneNumber: primaryPartner.phone,
                             coords: widget.userCoords,
                             isUrgentSos: true,
+                            mamaName: widget.mamaName,
+                            babyName: widget.babyName,
                           );
                           widget.onShowToast(
                             'Prepared SOS SMS with live GPS pin for ${primaryPartner.name}',
@@ -226,7 +233,8 @@ class _EmergencySpeedDialSheetState extends State<EmergencySpeedDialSheet> {
                           elevation: 0,
                           shape: const StadiumBorder(),
                         ),
-                        icon: const Icon(Icons.share_location_rounded, size: 18),
+                        icon:
+                            const Icon(Icons.share_location_rounded, size: 18),
                         label: Text(
                           'Text My Live GPS to ${primaryPartner.name.split(" ").first}',
                           style: NurtureBloomTextStyles.labelMd.copyWith(
@@ -458,8 +466,7 @@ class _EmergencySpeedDialSheetState extends State<EmergencySpeedDialSheet> {
                   ),
                 ),
                 TextButton.icon(
-                  onPressed: () =>
-                      setState(() => _showAddForm = !_showAddForm),
+                  onPressed: () => setState(() => _showAddForm = !_showAddForm),
                   icon: const Icon(Icons.person_add_alt_1_rounded, size: 16),
                   label: Text(
                     _showAddForm ? 'Close' : 'Add Contact',
@@ -639,6 +646,8 @@ class _EmergencySpeedDialSheetState extends State<EmergencySpeedDialSheet> {
                               phoneNumber: contact.phone,
                               coords: widget.userCoords,
                               isUrgentSos: true,
+                              mamaName: widget.mamaName,
+                              babyName: widget.babyName,
                             );
                             widget.onShowToast(
                               'Sending SOS + GPS coordinates to ${contact.name}...',
@@ -654,8 +663,7 @@ class _EmergencySpeedDialSheetState extends State<EmergencySpeedDialSheet> {
                         if (contact.isCustom) ...[
                           const SizedBox(width: 4),
                           IconButton(
-                            onPressed: () =>
-                                widget.onDeleteContact(contact.id),
+                            onPressed: () => widget.onDeleteContact(contact.id),
                             icon: const Icon(
                               Icons.delete_outline_rounded,
                               color: NurtureBloomColors.outline,

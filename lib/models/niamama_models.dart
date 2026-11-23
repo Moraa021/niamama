@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import '../services/pin_hasher.dart';
 
 class MotherTenantProfile {
+  /// True if [pin] matches the stored (hashed or legacy plaintext) PIN.
+  bool verifyPin(String pin) => PinHasher.verify(pin, pinCode);
+
   final String id;
   final String mamaName;
   final String phone;
@@ -28,8 +32,11 @@ class MotherTenantProfile {
   String get mamaFirstName => mamaName.split(' ').first;
 
   String get initials {
-    final parts =
-        mamaName.trim().split(RegExp(r'\s+')).where((s) => s.isNotEmpty).toList();
+    final parts = mamaName
+        .trim()
+        .split(RegExp(r'\s+'))
+        .where((s) => s.isNotEmpty)
+        .toList();
     if (parts.isEmpty) return 'M';
     if (parts.length == 1) return parts.first.substring(0, 1).toUpperCase();
     return '${parts.first[0]}${parts.last[0]}'.toUpperCase();
@@ -68,7 +75,8 @@ class MotherTenantProfile {
         'babyAgeWeeks': babyAgeWeeks,
         'babyDob': babyDob,
         'whoPassId': whoPassId,
-        'pinCode': pinCode,
+        'pinCode':
+            PinHasher.isHashed(pinCode) ? pinCode : PinHasher.hash(pinCode),
         'requirePinEveryTime': requirePinEveryTime,
         'avatarColorHex': avatarColorHex,
       };

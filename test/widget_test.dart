@@ -55,12 +55,15 @@ void main() {
       expect(await OfflineVaultService.loadActiveSessionTenantId(), amara.id);
 
       // Enable "Require PIN on every access" for Amara
-      final updatedAmara = amara.copyWith(requirePinEveryTime: true, pinCode: '4321');
+      final updatedAmara =
+          amara.copyWith(requirePinEveryTime: true, pinCode: '4321');
       await OfflineVaultService.saveTenants([updatedAmara, tenants[1]]);
 
       final reloadedTenants = await OfflineVaultService.loadTenants();
       expect(reloadedTenants.first.requirePinEveryTime, isTrue);
-      expect(reloadedTenants.first.pinCode, '4321');
+      expect(reloadedTenants.first.pinCode, isNot('4321'));
+      expect(reloadedTenants.first.verifyPin('4321'), isTrue);
+      expect(reloadedTenants.first.verifyPin('0000'), isFalse);
     },
   );
 

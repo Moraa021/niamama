@@ -189,13 +189,20 @@ class LocationService {
     required String phoneNumber,
     required UserCoordinates coords,
     required bool isUrgentSos,
+    String? mamaName,
+    String? babyName,
   }) async {
     final clean = phoneNumber.replaceAll(RegExp(r'[^0-9+]'), '');
     final mapsLink =
         'https://maps.google.com/?q=${coords.lat.toStringAsFixed(5)},${coords.lng.toStringAsFixed(5)}';
+    final mama =
+        (mamaName?.trim().isNotEmpty ?? false) ? mamaName!.trim() : 'Mama';
+    final baby =
+        (babyName?.trim().isNotEmpty ?? false) ? babyName!.trim() : null;
+    final who = baby != null ? '$mama & Baby $baby' : mama;
     final body = isUrgentSos
-        ? 'URGENT SOS from Niamama: Mama & Baby Leo need assistance. Location (${coords.areaName}): $mapsLink'
-        : 'Hi from Niamama: Checking in with Baby Leo. Our location (${coords.areaName}): $mapsLink';
+        ? 'URGENT SOS from Niamama: $who need assistance. Location (${coords.areaName}): $mapsLink'
+        : 'Hi from Niamama: Checking in from $who. Our location (${coords.areaName}): $mapsLink';
 
     final uri = Uri(
       scheme: 'sms',

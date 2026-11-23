@@ -249,8 +249,7 @@ class HomeDashboardScreen extends StatelessWidget {
                           ],
                         ),
                         IconButton(
-                          onPressed: () =>
-                              setModalState(() => sleepMins += 15),
+                          onPressed: () => setModalState(() => sleepMins += 15),
                           style: IconButton.styleFrom(
                             backgroundColor:
                                 NurtureBloomColors.surfaceContainerLowest,
@@ -298,8 +297,7 @@ class HomeDashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final latestFeed =
-        state.feedLogs.isNotEmpty ? state.feedLogs.first : null;
+    final latestFeed = state.feedLogs.isNotEmpty ? state.feedLogs.first : null;
     final lastFeedAgo = latestFeed != null
         ? OfflineVaultService.formatRelativeTime(latestFeed.timestamp)
         : '1h 45m ago';
@@ -820,7 +818,9 @@ class HomeDashboardScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(999),
                       ),
                       child: Text(
-                        isPostnatalScheduled ? 'Reminder Set ✓' : 'Mon 10:00 AM',
+                        isPostnatalScheduled
+                            ? 'Reminder Set ✓'
+                            : 'Mon 10:00 AM',
                         style: NurtureBloomTextStyles.labelSm.copyWith(
                           color: isPostnatalScheduled
                               ? NurtureBloomColors.onPrimaryFixed
@@ -1287,7 +1287,8 @@ class HomeDashboardScreen extends StatelessWidget {
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                       colors: [
-                        NurtureBloomColors.inverseSurface.withValues(alpha: 0.75),
+                        NurtureBloomColors.inverseSurface
+                            .withValues(alpha: 0.75),
                         Colors.transparent,
                       ],
                     ),

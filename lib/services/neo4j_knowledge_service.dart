@@ -75,9 +75,22 @@ class GroundedCareGuide {
 }
 
 class Neo4jKnowledgeGraphService {
-  static const String defaultEndpoint = 'http://localhost:7474';
-  static const String _defaultUser = 'neo4j';
-  static const String _defaultPassword = 'niamama_graph_2026';
+  /// Configure at build/run time, e.g.
+  /// `flutter run --dart-define=NEO4J_URI=http://192.168.1.20:7474 \
+  ///   --dart-define=NEO4J_USER=neo4j --dart-define=NEO4J_PASSWORD=...`
+  static const String defaultEndpoint = String.fromEnvironment(
+    'NEO4J_URI',
+    defaultValue: 'http://localhost:7474',
+  );
+  static const String _defaultUser = String.fromEnvironment(
+    'NEO4J_USER',
+    defaultValue: 'neo4j',
+  );
+  // Dev-only default matching docker-compose.yml; override for any real deployment.
+  static const String _defaultPassword = String.fromEnvironment(
+    'NEO4J_PASSWORD',
+    defaultValue: 'niamama_graph_2026',
+  );
   static const String _cacheKey = 'niamama_neo4j_graph_cache_v1';
 
   /// Embedded clinical knowledge graph nodes (mirrored into live Neo4j via Cypher MERGE).
@@ -94,7 +107,8 @@ class Neo4jKnowledgeGraphService {
         'Continue frequent breastfeeding to maintain hydration.',
         'Proceed to a Level 4/5 Pediatric ER or call 1190 / 0800 720 000 immediately.',
       ],
-      recommendedFacilityTag: 'Sub-County Referral Hospital (NICU & Pediatric ER)',
+      recommendedFacilityTag:
+          'Sub-County Referral Hospital (NICU & Pediatric ER)',
       whoCitationCode: 'WHO-IMCI-2024 • Neonatal Red Flag #RF-01',
       cypherPathSummary:
           '(:Symptom {id:"infant-fever-38"})-[:TRIGGERS_PATHWAY]->(:Triage {level:"URGENT_ER"})-[:ROUTES_TO]->(:Facility {cap:"NICU"})',
@@ -162,7 +176,8 @@ class Neo4jKnowledgeGraphService {
         'Use laid-back nursing so baby takes a deep, asymmetric latch.',
         'Message Midwife Sarah in Safe Chat or visit a Lactation Specialist if fever develops.',
       ],
-      recommendedFacilityTag: 'St. Jude Mother & Child Center (Lactation Clinic)',
+      recommendedFacilityTag:
+          'St. Jude Mother & Child Center (Lactation Clinic)',
       whoCitationCode: 'ABM-Protocol-#36 & WHO-Lactation-2024',
       cypherPathSummary:
           '(:Symptom {id:"lactation-mastitis"})-[:MANAGED_BY]->(:CareAction {protocol:"ABM-36"})-[:SUPPORTED_AT]->(:Facility {cap:"Lactation"})',
@@ -179,7 +194,8 @@ class Neo4jKnowledgeGraphService {
         'Place a clean, cool damp cloth gently over the thigh injection site.',
         'Check temperature if baby feels hot; seek care if fever reaches ≥ 38.0°C.',
       ],
-      recommendedFacilityTag: 'Community Post & Child Welfare (Immunization Desk)',
+      recommendedFacilityTag:
+          'Community Post & Child Welfare (Immunization Desk)',
       whoCitationCode: 'WHO-EPI-2024 • Post-Vaccination Care #PV-06',
       cypherPathSummary:
           '(:Vaccine {id:"penta1"})-[:EXPECTED_REACTION]->(:Symptom {id:"thigh_warmth"})-[:SELF_CARE]->(:CareAction)',
@@ -191,7 +207,8 @@ class Neo4jKnowledgeGraphService {
       id: 'growth-spurt-6w',
       tag: 'Growth Spurt',
       timeWindow: 'Day 21–42 (Weeks 3–6)',
-      title: 'The 6-week growth spurt: Survival guide & cluster feeding rhythms',
+      title:
+          'The 6-week growth spurt: Survival guide & cluster feeding rhythms',
       summary:
           'Around 6 weeks, infants experience a major neurological and physical leap. Cluster feeding in the evening is baby’s natural biological signal to calibrate your milk supply—not a sign of low milk.',
       whoSourceNode: 'WHO-Infant-Nutrition-2024 • Node #GN-6W',
@@ -361,8 +378,8 @@ class Neo4jKnowledgeGraphService {
             final lastRes = results.last as Map<String, dynamic>;
             final dataList = lastRes['data'] as List<dynamic>? ?? [];
             if (dataList.isNotEmpty) {
-              final row =
-                  (dataList.first as Map<String, dynamic>)['row'] as List<dynamic>?;
+              final row = (dataList.first as Map<String, dynamic>)['row']
+                  as List<dynamic>?;
               if (row != null && row.length >= 2) {
                 nodes = (row[0] as num?)?.toInt() ?? 28;
                 rels = (row[1] as num?)?.toInt() ?? 42;
@@ -401,7 +418,8 @@ class Neo4jKnowledgeGraphService {
     final combined = '${topics.join(" ")} $userText'.toLowerCase();
 
     // Determine best clinical node match
-    GroundedTriageNode matchedNode = clinicalTriageGraph[4]; // default lactation/latch
+    GroundedTriageNode matchedNode =
+        clinicalTriageGraph[4]; // default lactation/latch
     if (combined.contains('fever') ||
         combined.contains('hot') ||
         combined.contains('38') ||
@@ -465,7 +483,8 @@ class Neo4jKnowledgeGraphService {
       liveVerified = false;
     }
 
-    final sourceBadge = liveVerified ? 'Neo4j Live Graph' : 'Neo4j Offline Graph';
+    final sourceBadge =
+        liveVerified ? 'Neo4j Live Graph' : 'Neo4j Offline Graph';
     final actionBullets =
         matchedNode.immediateActions.map((a) => '• $a').join('\n');
 

@@ -132,9 +132,8 @@ class _NiamamaShellScreenState extends State<NiamamaShellScreen>
   }
 
   Future<void> _updateActiveTenantProfile(MotherTenantProfile updated) async {
-    final nextTenants = _tenants
-        .map((t) => t.id == updated.id ? updated : t)
-        .toList();
+    final nextTenants =
+        _tenants.map((t) => t.id == updated.id ? updated : t).toList();
     setState(() {
       _activeTenant = updated;
       _tenants = nextTenants;
@@ -291,6 +290,8 @@ class _NiamamaShellScreenState extends State<NiamamaShellScreen>
       builder: (ctx) => EmergencySpeedDialSheet(
         contacts: _state.contacts,
         userCoords: _userCoords,
+        mamaName: _activeTenant.mamaFirstName,
+        babyName: _activeTenant.babyName,
         gpsStatus: _gpsStatus,
         onRequestLocation: _requestLiveLocation,
         onAddContact: (newContact) {
@@ -681,6 +682,7 @@ class _NiamamaShellScreenState extends State<NiamamaShellScreen>
           ),
           TimelineVaccinesScreen(
             state: _state,
+            tenant: _activeTenant,
             onToggleCue: (cueId) {
               final nextCues = Map<String, bool>.from(_state.engagementCues);
               nextCues[cueId] = !(nextCues[cueId] ?? false);
@@ -727,6 +729,8 @@ class _NiamamaShellScreenState extends State<NiamamaShellScreen>
           SupportCircleScreen(
             state: _state,
             userCoords: _userCoords,
+            mamaName: _activeTenant.mamaFirstName,
+            babyName: _activeTenant.babyName,
             onToggleCircle: (circleId) {
               final nextCircles = Map<String, bool>.from(_state.joinedCircles);
               final nextJoined = !(nextCircles[circleId] ?? false);
@@ -804,9 +808,8 @@ class _NiamamaShellScreenState extends State<NiamamaShellScreen>
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
         decoration: BoxDecoration(
-          color: isActive
-              ? NurtureBloomColors.primaryFixed
-              : Colors.transparent,
+          color:
+              isActive ? NurtureBloomColors.primaryFixed : Colors.transparent,
           borderRadius: BorderRadius.circular(999),
         ),
         child: Column(

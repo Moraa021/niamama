@@ -6,6 +6,7 @@ import '../theme/nurture_bloom_theme.dart';
 
 class TimelineVaccinesScreen extends StatefulWidget {
   final NiamamaState state;
+  final MotherTenantProfile tenant;
   final void Function(String cueId) onToggleCue;
   final VoidCallback onCaptureSmileMemory;
   final VoidCallback onCompleteTummyTimeRound;
@@ -19,6 +20,7 @@ class TimelineVaccinesScreen extends StatefulWidget {
   const TimelineVaccinesScreen({
     super.key,
     required this.state,
+    required this.tenant,
     required this.onToggleCue,
     required this.onCaptureSmileMemory,
     required this.onCompleteTummyTimeRound,
@@ -116,7 +118,7 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                       Row(
                         children: [
                           Text(
-                            'Baby Leo',
+                            'Baby ${widget.tenant.babyName}',
                             style: NurtureBloomTextStyles.headlineSm,
                           ),
                           const Icon(
@@ -127,7 +129,7 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                         ],
                       ),
                       Text(
-                        '6 weeks • 4.8 kg',
+                        '${widget.tenant.babyAgeWeeks} weeks',
                         style: NurtureBloomTextStyles.labelSm,
                       ),
                     ],
@@ -151,7 +153,7 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                 const SizedBox(width: 6),
                 IconButton(
                   onPressed: () => widget.onShowToast(
-                    'Child profile active: Baby Leo (6 weeks)',
+                    'Child profile active: Baby ${widget.tenant.babyName} (${widget.tenant.babyAgeWeeks} weeks)',
                   ),
                   style: IconButton.styleFrom(
                     backgroundColor: NurtureBloomColors.surfaceContainerLow,
@@ -403,7 +405,7 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'Leo may beam back when you lean in close and speak softly.',
+                          '${widget.tenant.babyName} may beam back when you lean in close and speak softly.',
                           style: NurtureBloomTextStyles.bodySm,
                         ),
                       ],
@@ -425,7 +427,7 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Cues Leo is trying to engage:',
+                      'Cues ${widget.tenant.babyName} is trying to engage:',
                       style: NurtureBloomTextStyles.labelSm,
                     ),
                     const SizedBox(height: 8),
@@ -694,7 +696,8 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: NurtureBloomColors.secondaryFixed.withValues(alpha: 0.35),
+                  color:
+                      NurtureBloomColors.secondaryFixed.withValues(alpha: 0.35),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -709,7 +712,7 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                         ),
                         const SizedBox(width: 6),
                         Text(
-                          'Comfort tips for Leo',
+                          'Comfort tips for ${widget.tenant.babyName}',
                           style: NurtureBloomTextStyles.labelMd.copyWith(
                             color: NurtureBloomColors.secondary,
                           ),
@@ -735,7 +738,7 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                           CalendarReminderTarget(
                             id: 'vaccine-6w',
                             title:
-                                'Baby Leo 6-Week Immunizations (Penta 1, PCV 1, OPV 1, Rotavirus 1)',
+                                'Baby ${widget.tenant.babyName} 6-Week Immunizations (Penta 1, PCV 1, OPV 1, Rotavirus 1)',
                             subtitle: 'WHO Primary Protection Series',
                             location:
                                 'Midtown Child Welfare Clinic • Room 3B with Dr. Aris',
@@ -758,9 +761,7 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                           size: 18,
                         ),
                         label: Text(
-                          is6wScheduled
-                              ? 'Update Reminder'
-                              : 'Add to Calendar',
+                          is6wScheduled ? 'Update Reminder' : 'Add to Calendar',
                         ),
                       ),
                     ),
@@ -803,13 +804,12 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                       CalendarReminderTarget(
                         id: 'vaccine-10w',
                         title:
-                            'Baby Leo 10-Week Boosters (Penta 2, OPV 2, Rotavirus 2)',
+                            'Baby ${widget.tenant.babyName} 10-Week Boosters (Penta 2, OPV 2, Rotavirus 2)',
                         subtitle: 'WHO 10-Week Series',
                         location: 'Midtown Child Welfare Clinic',
                         description:
                             '10-week booster immunizations: Penta 2, OPV 2, Rotavirus 2.',
-                        startDate:
-                            DateTime.now().add(const Duration(days: 32)),
+                        startDate: DateTime.now().add(const Duration(days: 32)),
                       ),
                     ),
                     child: Text(
@@ -854,13 +854,12 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                       CalendarReminderTarget(
                         id: 'vaccine-14w',
                         title:
-                            'Baby Leo 14-Week Protection (Penta 3, PCV 2, IPV)',
+                            'Baby ${widget.tenant.babyName} 14-Week Protection (Penta 3, PCV 2, IPV)',
                         subtitle: 'WHO 14-Week Series',
                         location: 'Midtown Child Welfare Clinic',
                         description:
                             '14-week immunizations: Penta 3, PCV 2, and IPV (Inactivated Polio).',
-                        startDate:
-                            DateTime.now().add(const Duration(days: 60)),
+                        startDate: DateTime.now().add(const Duration(days: 60)),
                       ),
                     ),
                     child: Text(
@@ -969,7 +968,8 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: NurtureBloomColors.secondaryFixed.withValues(alpha: 0.35),
+                  color:
+                      NurtureBloomColors.secondaryFixed.withValues(alpha: 0.35),
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Row(
@@ -1214,7 +1214,8 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
                     ? NurtureBloomColors.primary
                     : isOral
                         ? NurtureBloomColors.secondaryFixed
-                        : NurtureBloomColors.primaryFixed.withValues(alpha: 0.5),
+                        : NurtureBloomColors.primaryFixed
+                            .withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(999),
               ),
               child: Text(

@@ -1,3 +1,4 @@
+import '../services/pin_hasher.dart';
 import 'package:flutter/material.dart';
 import '../models/niamama_models.dart';
 import '../theme/nurture_bloom_theme.dart';
@@ -40,8 +41,7 @@ class _MotherAuthPinScreenState extends State<MotherAuthPinScreen> {
   final TextEditingController _mamaNameCtrl = TextEditingController();
   final TextEditingController _phoneCtrl = TextEditingController();
   final TextEditingController _babyNameCtrl = TextEditingController();
-  final TextEditingController _babyWeeksCtrl =
-      TextEditingController(text: '4');
+  final TextEditingController _babyWeeksCtrl = TextEditingController(text: '4');
   final TextEditingController _newPinCtrl = TextEditingController();
   bool _newTenantRequirePinEveryTime = false;
 
@@ -102,7 +102,7 @@ class _MotherAuthPinScreenState extends State<MotherAuthPinScreen> {
   void _verifyLockedSessionPin() {
     final tenant = widget.lockedTenant;
     if (tenant == null) return;
-    if (_enteredPin == tenant.pinCode) {
+    if (tenant.verifyPin(_enteredPin)) {
       widget.onAuthenticated(
         tenant,
         requirePinEveryTime: _requirePinEveryTime,
@@ -139,7 +139,7 @@ class _MotherAuthPinScreenState extends State<MotherAuthPinScreen> {
           normName == rawId.toLowerCase() ||
           normFirst == rawId.toLowerCase();
 
-      if (idMatches && t.pinCode == pin) {
+      if (idMatches && t.verifyPin(pin)) {
         matched = t;
         break;
       }
@@ -212,9 +212,8 @@ class _MotherAuthPinScreenState extends State<MotherAuthPinScreen> {
     final dobFormatted =
         '${months[dobDate.month - 1]} ${dobDate.day}, ${dobDate.year}';
     final randSuffix = (now.millisecondsSinceEpoch % 90000 + 10000).toString();
-    final initials = babyName.isNotEmpty
-        ? babyName.substring(0, 1).toUpperCase()
-        : 'B';
+    final initials =
+        babyName.isNotEmpty ? babyName.substring(0, 1).toUpperCase() : 'B';
 
     final newTenant = MotherTenantProfile(
       id: 'tenant-${now.millisecondsSinceEpoch}',
@@ -224,7 +223,7 @@ class _MotherAuthPinScreenState extends State<MotherAuthPinScreen> {
       babyAgeWeeks: weeks.clamp(1, 104),
       babyDob: dobFormatted,
       whoPassId: '#WHO-$randSuffix-$initials',
-      pinCode: pin,
+      pinCode: PinHasher.hash(pin),
       requirePinEveryTime: _newTenantRequirePinEveryTime,
       avatarColorHex: '#3E644A',
     );

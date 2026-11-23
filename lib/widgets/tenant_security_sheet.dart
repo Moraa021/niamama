@@ -1,3 +1,4 @@
+import '../services/pin_hasher.dart';
 import 'package:flutter/material.dart';
 import '../models/niamama_models.dart';
 import '../theme/nurture_bloom_theme.dart';
@@ -57,7 +58,7 @@ class _TenantSecuritySheetState extends State<TenantSecuritySheet> {
       setState(() => _pinError = 'Please enter a valid 4-digit numeric PIN');
       return;
     }
-    final updated = widget.activeTenant.copyWith(pinCode: pin);
+    final updated = widget.activeTenant.copyWith(pinCode: PinHasher.hash(pin));
     widget.onUpdateActiveTenant(updated);
     setState(() {
       _isEditingPin = false;
