@@ -1,3 +1,4 @@
+import '../widgets/safe_avatar.dart';
 import 'package:flutter/material.dart';
 import '../models/niamama_models.dart';
 import '../services/location_service.dart';
@@ -589,21 +590,16 @@ class _EmergencySpeedDialSheetState extends State<EmergencySpeedDialSheet> {
                     Expanded(
                       child: Row(
                         children: [
-                          CircleAvatar(
+                          SafeAvatar(
                             radius: 22,
+                            url: contact.avatarUrl,
                             backgroundColor: NurtureBloomColors.primaryFixed,
-                            backgroundImage: contact.avatarUrl != null
-                                ? NetworkImage(contact.avatarUrl!)
-                                : null,
-                            child: contact.avatarUrl == null
-                                ? Text(
-                                    contact.name.characters.first.toUpperCase(),
-                                    style: NurtureBloomTextStyles.headlineSm
-                                        .copyWith(
-                                      color: NurtureBloomColors.onPrimaryFixed,
-                                    ),
-                                  )
-                                : null,
+                            fallback: Text(
+                              contact.name.characters.first.toUpperCase(),
+                              style: NurtureBloomTextStyles.headlineSm.copyWith(
+                                color: NurtureBloomColors.onPrimaryFixed,
+                              ),
+                            ),
                           ),
                           const SizedBox(width: 12),
                           Expanded(

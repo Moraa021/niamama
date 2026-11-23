@@ -1,3 +1,4 @@
+import '../widgets/safe_avatar.dart';
 import 'package:flutter/material.dart';
 import '../models/niamama_models.dart';
 import '../services/location_service.dart';
@@ -113,9 +114,12 @@ class SupportCircleScreen extends StatelessWidget {
                       children: [
                         Stack(
                           children: [
-                            const CircleAvatar(
+                            const SafeAvatar(
                               radius: 28,
-                              backgroundImage: NetworkImage(_midwifeSarahImg),
+                              url: _midwifeSarahImg,
+                              backgroundColor: NurtureBloomColors.primaryFixed,
+                              fallback: Icon(Icons.health_and_safety_rounded,
+                                  color: NurtureBloomColors.onPrimaryFixed),
                             ),
                             Positioned(
                               bottom: 0,
@@ -320,18 +324,14 @@ class SupportCircleScreen extends StatelessWidget {
                 Expanded(
                   child: Row(
                     children: [
-                      CircleAvatar(
+                      SafeAvatar(
                         radius: 24,
+                        url: contact.avatarUrl,
                         backgroundColor: NurtureBloomColors.primaryFixed,
-                        backgroundImage: contact.avatarUrl != null
-                            ? NetworkImage(contact.avatarUrl!)
-                            : null,
-                        child: contact.avatarUrl == null
-                            ? Text(
-                                contact.name.characters.first.toUpperCase(),
-                                style: NurtureBloomTextStyles.headlineSm,
-                              )
-                            : null,
+                        fallback: Text(
+                          contact.name.characters.first.toUpperCase(),
+                          style: NurtureBloomTextStyles.headlineSm,
+                        ),
                       ),
                       const SizedBox(width: 12),
                       Expanded(

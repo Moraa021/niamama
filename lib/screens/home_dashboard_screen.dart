@@ -660,7 +660,7 @@ class HomeDashboardScreen extends StatelessWidget {
                       CalendarReminderTarget(
                         id: 'vaccine-6w',
                         title:
-                            'Baby Leo 6-Week Immunizations (Penta 1, PCV 1, OPV 1, Rotavirus 1)',
+                            'Baby ${activeTenant.babyName} 6-Week Immunizations (Penta 1, PCV 1, OPV 1, Rotavirus 1)',
                         subtitle: 'WHO Primary Protection Series',
                         location:
                             'Midtown Child Welfare Clinic • Room 3B with Dr. Aris',

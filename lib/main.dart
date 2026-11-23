@@ -1,3 +1,4 @@
+import 'widgets/safe_avatar.dart';
 import 'package:flutter/material.dart';
 import 'models/niamama_models.dart';
 import 'screens/care_map_screen.dart';
@@ -469,9 +470,11 @@ class _NiamamaShellScreenState extends State<NiamamaShellScreen>
                         onTap: () => setState(() => _activeTabIndex = 0),
                         child: Row(
                           children: [
-                            const CircleAvatar(
+                            const SafeAvatar(
                               radius: 17,
-                              backgroundImage: NetworkImage(_logoUrl),
+                              url: _logoUrl,
+                              backgroundColor: NurtureBloomColors.primaryFixed,
+                              fallback: Icon(Icons.favorite_rounded, size: 16),
                             ),
                             const SizedBox(width: 8),
                             Text(

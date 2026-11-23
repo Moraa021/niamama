@@ -1,3 +1,4 @@
+import '../widgets/safe_avatar.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../models/niamama_models.dart';
@@ -106,10 +107,14 @@ class _TimelineVaccinesScreenState extends State<TimelineVaccinesScreen> {
               ),
               child: Row(
                 children: [
-                  CircleAvatar(
+                  SafeAvatar(
                     radius: 20,
+                    url: _babyLeoAvatar,
                     backgroundColor: NurtureBloomColors.secondaryFixed,
-                    backgroundImage: const NetworkImage(_babyLeoAvatar),
+                    fallback: Text(
+                      widget.tenant.babyName.characters.first.toUpperCase(),
+                      style: NurtureBloomTextStyles.headlineSm,
+                    ),
                   ),
                   const SizedBox(width: 10),
                   Column(
